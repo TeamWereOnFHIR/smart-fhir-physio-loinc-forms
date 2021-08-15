@@ -5,8 +5,8 @@ import { RANDOM_USER_API_PATH } from "./constants";
  */
 class MockPersonService {
   /**
-   * Fetches random users from randomuser.me/api
-   * @returns Array of random user objects.
+   * Fetches random a user from randomuser.me/api
+   * @returns User object with data.
    */
   static fetchRandomUser = async () => {
     const data = await fetch(RANDOM_USER_API_PATH)
