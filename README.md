@@ -1,4 +1,4 @@
-# SMART on FHIR Physiotherapy LOIN Forms
+# SMART on FHIR Physiotherapy LOINC Forms
 
 SMART on FHIR Physiotherapy LOINC Forms App is a project that digitises LOINC forms
 and physiotherapy workflows via a custom SMART on FHIR app and is designed to take
