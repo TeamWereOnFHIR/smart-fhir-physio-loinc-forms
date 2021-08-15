@@ -74,3 +74,46 @@ To lint in cmd line use `npm run lint`.
 ## React Naming Conventions
 
 When naming files for `Components`, use PascalCase. For example, a service would be called `someService.js` whereas a form component might be called `SomeUniqueForm.js`.
+
+## App structure
+
+Proposed app structure.
+
+```
+app/
+├─ public/
+├─ src/
+│  ├─ assets/
+│  ├─ common/
+│  │  ├─ constants/
+│  │  ├─ theme/
+│  │  ├─ utils/
+│  ├─ components/
+│  │  ├─ ...componentGroups/
+│  ├─ features/
+│  │  ├─ ...features/
+│  ├─ redux/
+│  │  ├─ slices/
+│  ├─ router/
+│  ├─ services/
+│  ├─ App.js
+│  ├─ index.js
+```
+
+**assets**: Assets for this app, e.g., images.
+
+**common**: Holds all common functionality that is shared throughout the app, excluding shared components.
+
+**components**: Shared reusable 'dumb' components that merely take in parameters as props to be rendered as part of larger components and features. Each component can have its own .js and .css file as needed. Components can be grouped based on functionality where logical.
+
+**features**: This name can change, other names include containers, view, screens, etc. Encompasses unique features that make up the app. Each feature can have its own .js, .css, constants, etc, as needed. Features are housed in their own internal folders.
+
+**Redux**: Redux state management and store for state. Slices contains the state slice and building blocks of each logical state required in the app that can be used throughout the app without mutation within the component hierarchy.
+
+**Router**: Holds all app router related functionality.
+
+**Services**: Should hold all service and/or api related modules that deal with retrieving data, parsing data, and small bits of logic.
+
+**App.js** The entry point to react apps.
+
+**index.js** The root of the app.
