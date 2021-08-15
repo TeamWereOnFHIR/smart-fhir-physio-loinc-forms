@@ -1,26 +1,31 @@
 import UserCard from "@components/UserCard";
+import { setUser, setUserLoading } from "@redux/slices/userSlice";
 import MockPersonService from "@services/mockPersonService";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./UserHeaderExample.css";
 
 const UserHeaderExample = () => {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     generateRandomUser();
   }, []);
 
   const generateRandomUser = async () => {
+    dispatch(setUserLoading());
     const data = await MockPersonService.fetchRandomUser();
-    setUser(data);
+    dispatch(setUser(data));
   };
 
   const getUserDOB = () => {
-    if (!user) {
+    if (user.loading) {
       return "";
     }
-    const dob = moment(user.dob.date).format("Do MMMM YYYY");
+    const dob = moment(user.userData.dob.date).format("Do MMMM YYYY");
     return dob;
   };
 
@@ -30,14 +35,13 @@ const UserHeaderExample = () => {
   };
 
   const renderUserCard = () => {
-    console.log(user);
     return (
       <UserCard
-        firstName={user.name.first}
-        lastName={user.name.last}
-        photoPath={user.picture.large}
+        firstName={user.userData.name.first}
+        lastName={user.userData.name.last}
+        photoPath={user.userData.picture.large}
         dob={getUserDOB()}
-        email={user.email}
+        email={user.userData.email}
       />
     );
   };
@@ -47,7 +51,7 @@ const UserHeaderExample = () => {
       <div className="ui grid">
         <div className="eight wide column centered">
           <div className="ui stacked segment">
-            {user ? renderUserCard() : "Loading..."}
+            {user.loading ? "Loading..." : renderUserCard()}
             <div className="ui container center aligned">
               <button
                 className="ui primary button"
