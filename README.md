@@ -70,3 +70,7 @@ In VSCode recommend the following in your settings.json:
 ```
 
 To lint in cmd line use `npm run lint`.
+
+## React Naming Conventions
+
+When naming files for `Components`, use PascalCase. For example, a service would be called `someService.js` whereas a form component might be called `SomeUniqueForm.js`.

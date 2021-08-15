@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { userData: undefined, loading: true };
+const initialState = { userData: undefined, loading: true, isAuth: false };
 
+// This is just an example, we can create many slices of state as we need and where it makes logical sense.
 export const userSlice = createSlice({
   name: "user",
   initialState,
