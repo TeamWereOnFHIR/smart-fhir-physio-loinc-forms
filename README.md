@@ -22,6 +22,7 @@ The University of Queensland. Our team comprises skills in both UX and Developme
 This app is built with ReactJS and requires:
 
 - Nodejs (LTS or Latest Stable)
+- If React error occurs 'Cannot find typescript' try the following command: npm i -D @types/node typescript ts-node
 
 ## How to setup the App
 
