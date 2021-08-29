@@ -1,19 +1,56 @@
-import UserCard from "@components/UserCard";
-import { setUser, setUserLoading } from "@redux/slices/userSlice";
-import MockPersonService from "@services/mockPersonService";
-import moment from "moment";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import "./UserHeaderExample.css";
 
+import { setUser, setUserLoading } from "@redux/slices/userSlice";
+import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { FhirClientContext } from "@services/fhir/FhirClientContext";
+import MockPersonService from "@services/mockPersonService";
+import UserCard from "@components/UserCard";
+import moment from "moment";
+
+// Create component instead of making components in components!
+const PatientName = ({ name = [] }) => {
+  let entry =
+    name.find((nameRecord) => nameRecord.use === "official") || name[0];
+  if (!entry) {
+    return <h1>No Name</h1>;
+  }
+  return <h1>Patient: {entry.given.join(" ") + " " + entry.family}</h1>;
+};
+
 const UserHeaderExample = () => {
-  // const [user, setUser] = useState(null);
+  // Redux
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
+  // Fhir client
+  const context = useContext(FhirClientContext);
+  const fhir = context.client;
+  const [patient, setPatient] = useState({});
+
+  /**
+   * Component on init effects.
+   *
+   * Ensure empty array param is passed to indicate this should only happen on init.
+   *
+   * Especially db type calls - otherwise we'll be making calls forever!
+   */
   useEffect(() => {
     generateRandomUser();
+    getPatientFromFhir();
   }, []);
+
+  const getPatientFromFhir = async () => {
+    fhir.patient
+      .read()
+      .then((patient) => {
+        setPatient(patient);
+      })
+      .catch((error) => {
+        console.log(`ERROR: ${error}`);
+      });
+  };
 
   const generateRandomUser = async () => {
     dispatch(setUserLoading());
@@ -46,6 +83,14 @@ const UserHeaderExample = () => {
     );
   };
 
+  const renderPatientInfo = () => {
+    return (
+      <div>
+        <PatientName name={patient.name} />
+      </div>
+    );
+  };
+
   return (
     <div className="box">
       <div className="ui grid">
@@ -60,6 +105,7 @@ const UserHeaderExample = () => {
                 Refresh User
               </button>
             </div>
+            <div>{patient ? renderPatientInfo() : "Loading Patient..."}</div>
           </div>
         </div>
       </div>
