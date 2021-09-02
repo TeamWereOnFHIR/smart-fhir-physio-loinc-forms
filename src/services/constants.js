@@ -4,5 +4,5 @@ export const FhirServiceConstants = {
   sandboxApi: `https://launch.smarthealthit.org/v/r4/sim/eyJoIjoiMSIsImkiOiIxIiwiaiI6IjEifQ/fhir`,
   sandboxScopes:
     "launch launch/patient patient/*.* offline_access openid fhirUser",
-  redirectUri: "/example",
+  redirectUri: "/home",
 };
