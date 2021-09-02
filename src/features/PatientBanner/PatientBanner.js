@@ -9,7 +9,7 @@ const PatientBanner = ({ patientData }) => {
     <>
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-row gap-x-5">
+          <div className="flex flex-row gap-x-8">
             <div>
               <h1 className="text-xl font-bold text-gray-900">Patient</h1>
               <p>{ptName}</p>
