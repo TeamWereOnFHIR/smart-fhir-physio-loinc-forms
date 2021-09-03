@@ -2,6 +2,7 @@ import "./App.css";
 
 import { BrowserRouter, Route } from "react-router-dom";
 
+import NavBanner from "@features/Nav/NavBanner";
 import PrivateRoute from "./router/PrivateRoute";
 import routes from "./router/routes";
 
@@ -18,7 +19,12 @@ function App() {
       <Route exact path={route.path} component={route.component} key={key} />
     )
   );
-  return <BrowserRouter>{appRoutes}</BrowserRouter>;
+  return (
+    <div>
+      <NavBanner />
+      <BrowserRouter>{appRoutes}</BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
