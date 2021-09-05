@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 
+import Button from "@components/Button/Button";
 import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import PatientBanner from "@features/PatientBanner/PatientBanner";
+import { buttonActionTypes } from "@components/Button/buttonConstants";
 
 const HomeScreen = () => {
   const context = useContext(FhirClientContext);
@@ -40,6 +42,14 @@ const HomeScreen = () => {
               <h1 className="text-2xl font-bold text-gray-900">
                 Such content!
               </h1>
+              <Button actionType={buttonActionTypes.primary}>Primary</Button>
+              <Button actionType={buttonActionTypes.secondary}>
+                Secondary
+              </Button>
+              <Button actionType={buttonActionTypes.flat}>Flat Button</Button>
+              <Button actionType={buttonActionTypes.flatRounded}>
+                Flat Rounded
+              </Button>
             </div>
           </div>
           {/* /End replace */}
