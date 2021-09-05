@@ -30,6 +30,10 @@ const HomeScreen = () => {
       });
   };
 
+  const handleClickTest = () => {
+    alert("Clicked!");
+  };
+
   return (
     <div>
       <PatientBanner patientData={patient} />
@@ -42,12 +46,28 @@ const HomeScreen = () => {
               <h1 className="text-2xl font-bold text-gray-900">
                 Such content!
               </h1>
-              <Button actionType={buttonActionTypes.primary}>Primary</Button>
-              <Button actionType={buttonActionTypes.secondary}>
-                Secondary
+              <Button
+                actionType={buttonActionTypes.primary}
+                handleClick={handleClickTest}
+              >
+                Primary Raised
               </Button>
-              <Button actionType={buttonActionTypes.flat}>Flat Button</Button>
-              <Button actionType={buttonActionTypes.flatRounded}>
+              <Button
+                actionType={buttonActionTypes.secondary}
+                handleClick={handleClickTest}
+              >
+                Secondary Raised
+              </Button>
+              <Button
+                actionType={buttonActionTypes.flat}
+                handleClick={handleClickTest}
+              >
+                Flat Button
+              </Button>
+              <Button
+                actionType={buttonActionTypes.flatRounded}
+                handleClick={handleClickTest}
+              >
                 Flat Rounded
               </Button>
             </div>
