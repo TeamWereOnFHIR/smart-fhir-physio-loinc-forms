@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-
-import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import PatientBanner from "@features/PatientBanner/PatientBanner";
+import { FhirClientContext } from "@services/fhir/FhirClientContext";
+import { useContext, useEffect, useState } from "react";
 
 const HomeScreen = () => {
   const context = useContext(FhirClientContext);
@@ -37,9 +36,7 @@ const HomeScreen = () => {
           {/* Replace this with actual content or components */}
           <div className="px-4 py-6 sm:px-0">
             <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 p-2">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Such content!
-              </h1>
+              <h1 className="text-2xl font-bold text-gray-900"></h1>
             </div>
           </div>
           {/* /End replace */}
