@@ -1,6 +1,7 @@
-import { FhirServiceConstants } from "../constants";
 import { oauth2 as SMART } from "fhirclient";
 import { useEffect } from "react";
+import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
+import { FhirServiceConstants } from "../constants";
 
 /**
  * Typically the launch page is an empty page with a `SMART.authorize`
@@ -19,7 +20,7 @@ const FhirLauncher = () => {
     });
   }, []);
 
-  return "Launching...";
+  return <LoadingIndicator text={"Launching..."} />;
 };
 
 export default FhirLauncher;
