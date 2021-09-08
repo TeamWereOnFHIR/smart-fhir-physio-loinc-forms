@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import Button from "@components/Button/Button";
 import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import PatientBanner from "@features/PatientBanner/PatientBanner";
-import { buttonActionTypes } from "@components/Button/buttonConstants";
+import { buttonTypes } from "@components/Button/buttonConstants";
 
 const HomeScreen = () => {
   const context = useContext(FhirClientContext);
@@ -40,35 +40,23 @@ const HomeScreen = () => {
 
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* Replace this with actual content or components */}
+          {/* Replace this with actual components */}
           <div className="px-4 py-6 sm:px-0">
             <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 p-2">
               <h1 className="text-2xl font-bold text-gray-900">
                 Such content!
               </h1>
               <Button
-                actionType={buttonActionTypes.primary}
+                buttonType={buttonTypes.primary}
                 handleClick={handleClickTest}
               >
-                Primary Raised
+                Primary Button
               </Button>
               <Button
-                actionType={buttonActionTypes.secondary}
+                buttonType={buttonTypes.secondary}
                 handleClick={handleClickTest}
               >
-                Secondary Raised
-              </Button>
-              <Button
-                actionType={buttonActionTypes.flat}
-                handleClick={handleClickTest}
-              >
-                Flat Button
-              </Button>
-              <Button
-                actionType={buttonActionTypes.flatRounded}
-                handleClick={handleClickTest}
-              >
-                Flat Rounded
+                Secondary Button
               </Button>
             </div>
           </div>

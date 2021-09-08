@@ -1,4 +1,4 @@
-export const buttonActionTypes = {
+export const buttonTypes = {
   primary: "primary",
   secondary: "secondary",
   flat: "flat",
@@ -6,8 +6,6 @@ export const buttonActionTypes = {
 };
 
 export const buttonColours = {
-  primary: "green",
+  primary: "gray",
   secondary: "gray",
-  flat: "green",
-  flatRounded: "indigo",
 };
