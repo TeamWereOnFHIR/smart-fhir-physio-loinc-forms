@@ -3,6 +3,7 @@ import {
   setPatientError,
   setPatientLoading,
 } from "@redux/slices/patientSlice";
+import { setUser, setUserError, setUserLoading } from "@redux/slices/userSlice";
 import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,9 +18,12 @@ const HomeScreen = () => {
   const context = useContext(FhirClientContext);
   const fhir = context.client;
 
-  // Patient State
+  // Redux
   const dispatch = useDispatch();
+  // Patient State
   const patient = useSelector((state) => state.patient);
+  // User State
+  const user = useSelector((state) => state.user);
 
   /**
    * Component on init effects.
@@ -28,8 +32,10 @@ const HomeScreen = () => {
    */
   useEffect(() => {
     getPatientFromFhir();
+    getUserFromFhir();
   }, []);
 
+  // #TODO: Make Fhir Service
   const getPatientFromFhir = async () => {
     fhir.patient
       .read()
@@ -47,13 +53,30 @@ const HomeScreen = () => {
       });
   };
 
+  const getUserFromFhir = async () => {
+    fhir.user
+      .read()
+      .then((data) => {
+        dispatch(setUser(data));
+        dispatch(setUserLoading(false));
+        if (user.error) {
+          dispatch(setUserError(""));
+        }
+      })
+      .catch((error) => {
+        dispatch(setUserError(error));
+        // Temporary
+        console.error(error);
+      });
+  };
+
   const handleClickTest = () => {
     alert("Clicked!");
   };
 
   return (
     <div>
-      {patient.loading ? (
+      {patient.loading || user.loading ? (
         <LoadingIndicator text="Loading..." />
       ) : (
         <>
