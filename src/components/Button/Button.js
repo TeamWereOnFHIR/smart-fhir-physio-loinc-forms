@@ -21,7 +21,7 @@ const secondaryStyles = `bg-${buttonColours.secondary}-400 active:bg-${buttonCol
  * Generic app button. Can be set to primary or secondary.
  *
  * Usage:
- *  <Button buttonType={type} onClick={func}
+ *  <Button buttonType={type} onClick={func}>Button Text</Button>
  *
  * Props:
  *  buttonType - buttonTypes.primary || buttonTypes.secondary
