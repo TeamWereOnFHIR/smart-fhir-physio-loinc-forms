@@ -1,7 +1,10 @@
+import Button from "@components/Button/Button";
+import { buttonTypes } from "@components/Button/buttonConstants";
 import PatientBanner from "@features/PatientBanner/PatientBanner";
 import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import { useContext, useEffect, useState } from "react";
 import ProductReviewForm from "../FormHandler/FormHandler";
+
 const HomeScreen = () => {
   const context = useContext(FhirClientContext);
   const fhir = context.client;
@@ -27,19 +30,35 @@ const HomeScreen = () => {
       });
   };
 
+  const handleClickTest = () => {
+    alert("Clicked!");
+  };
+
   return (
     <div>
       <PatientBanner patientData={patient} />
 
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* Replace this with actual content or components */}
+          {/* Replace this with actual components */}
           <div className="px-4 py-6 sm:px-0">
             <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 p-2">
               <h1 className="text-2xl font-bold text-gray-900">
                 {" "}
                 <ProductReviewForm />
               </h1>
+              <Button
+                buttonType={buttonTypes.primary}
+                handleClick={handleClickTest}
+              >
+                Primary Button
+              </Button>
+              <Button
+                buttonType={buttonTypes.secondary}
+                handleClick={handleClickTest}
+              >
+                Secondary Button
+              </Button>
             </div>
           </div>
           {/* /End replace */}
