@@ -1,17 +1,17 @@
+import Button from "@components/Button/Button";
+import { buttonTypes } from "@components/Button/buttonConstants";
+import LoadingIndicator from "@components/LoadingIndicator/LoadingIndicator";
+import PatientBanner from "@features/PatientBanner/PatientBanner";
 import {
   setPatient,
   setPatientError,
   setPatientLoading,
 } from "@redux/slices/patientSlice";
 import { setUser, setUserError, setUserLoading } from "@redux/slices/userSlice";
+import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import Button from "@components/Button/Button";
-import { FhirClientContext } from "@services/fhir/FhirClientContext";
-import LoadingIndicator from "@components/LoadingIndicator/LoadingIndicator";
-import PatientBanner from "@features/PatientBanner/PatientBanner";
-import { buttonTypes } from "@components/Button/buttonConstants";
+import ProductReviewForm from "../FormHandler/FormHandler";
 
 const HomeScreen = () => {
   // Fhir Client
@@ -86,9 +86,7 @@ const HomeScreen = () => {
               {/* Replace this with actual components */}
               <div className="px-4 py-6 sm:px-0">
                 <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 p-2">
-                  <h1 className="text-2xl font-bold text-gray-900">
-                    Such content!
-                  </h1>
+                  <ProductReviewForm />
                   <Button
                     buttonType={buttonTypes.primary}
                     handleClick={handleClickTest}
