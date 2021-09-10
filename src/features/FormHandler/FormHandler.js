@@ -1,35 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
-import * as Yup from "yup";
+import option1 from "./formVariables";
+import validationSchema from "./validationSchema";
 
 const ProductReviewForm = () => {
-  const option1 = [
-    "Hospital",
-    "Deparment of Motor Vechiles",
-    "Social Security Adminstration",
-  ];
-  const option2 = [
-    "Hospital",
-    "Deparment of Motor Vechiles",
-    "Social Security Adminstration",
-  ];
-  const options3 = [
-    "Hospital",
-    "Deparment of Motor Vechiles",
-    "Social Security Adminstration",
-  ];
-
-  const validationSchema = Yup.object({
-    product: Yup.string().required("Please select a option").oneOf(option1),
-    /* name: Yup.string().required(),
-    email: Yup.string().email().required(),
-    title: Yup.string().required(),
-    review: Yup.string().required(),
-    rating: Yup.number().min(1).max(10).required(),
-    date: Yup.date().default(() => new Date()),
-    wouldRecommend: Yup.boolean().default(false),*/
-  });
-
   const initialValues = {
     date: new Date(),
     product: "",
