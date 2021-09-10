@@ -9,11 +9,9 @@ advantage of the capabilities digital tech provides beyond simple form recreatio
 We are a project team formed in the 2021 offering of COMP3820 Digital Health at
 The University of Queensland. Our team comprises skills in both UX and Development:
 
-- Finn Beardmore
-- Peiwen Li
-- Jameson Nguyen (@JNRuan)
-- Carl Shield
-- Yilin Su
+- Finn Beardmore (finnbutler)
+- Jameson Nguyen (JNRuan)
+- Yilin Su (suylyus)
 
 # Setup
 
@@ -21,7 +19,7 @@ The University of Queensland. Our team comprises skills in both UX and Developme
 
 This app is built with ReactJS and requires:
 
-- Nodejs (LTS or Latest Stable)
+- Nodejs (LTS 14+)
 - If React error occurs 'Cannot find typescript' try the following command: npm i -D @types/node typescript ts-node
 
 ## How to setup the App
