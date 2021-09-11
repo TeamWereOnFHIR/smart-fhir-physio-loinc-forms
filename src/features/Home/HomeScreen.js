@@ -1,17 +1,25 @@
-import Button from "@components/Button/Button";
-import { buttonTypes } from "@components/Button/buttonConstants";
-import LoadingIndicator from "@components/LoadingIndicator/LoadingIndicator";
-import PatientBanner from "@features/PatientBanner/PatientBanner";
+import {
+  setLoincFormData,
+  setLoincFormDataError,
+  setLoincFormInitialPanel,
+  setLoincFormSubPanels,
+} from "@redux/slices/loincFormSlice";
 import {
   setPatient,
   setPatientError,
   setPatientLoading,
 } from "@redux/slices/patientSlice";
 import { setUser, setUserError, setUserLoading } from "@redux/slices/userSlice";
-import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import Button from "@components/Button/Button";
+import { FhirApiUrl } from "@services/constants";
+import { FhirClientContext } from "@services/fhir/FhirClientContext";
+import LoadingIndicator from "@components/LoadingIndicator/LoadingIndicator";
+import PatientBanner from "@features/PatientBanner/PatientBanner";
 import ProductReviewForm from "../FormHandler/FormHandler";
+import { buttonTypes } from "@components/Button/buttonConstants";
 
 const HomeScreen = () => {
   // Fhir Client
@@ -24,6 +32,8 @@ const HomeScreen = () => {
   const patient = useSelector((state) => state.patient);
   // User State
   const user = useSelector((state) => state.user);
+  // Form Data State
+  const loincForm = useSelector((state) => state.loincForm);
 
   /**
    * Component on init effects.
@@ -33,6 +43,7 @@ const HomeScreen = () => {
   useEffect(() => {
     getPatientFromFhir();
     getUserFromFhir();
+    getQuestionnaire();
   }, []);
 
   // #TODO: Make Fhir Service
@@ -66,6 +77,32 @@ const HomeScreen = () => {
       .catch((error) => {
         dispatch(setUserError(error));
         // Temporary
+        console.error(error);
+      });
+  };
+
+  const getQuestionnaire = async () => {
+    const url = FhirApiUrl.loincPhysioFormURL;
+    fhir
+      .request(url)
+      .then((data) => {
+        dispatch(setLoincFormData(data));
+        if (loincForm.error) {
+          dispatch(setLoincFormDataError(""));
+        }
+        const initialPanelItems = data.item.filter(
+          (item) => item.type !== "group"
+        );
+        const subPanels = data.item.filter((item) => item.type === "group");
+        const initialPanelData = {
+          id: data.id,
+          title: data.title,
+          item: initialPanelItems,
+        };
+        dispatch(setLoincFormInitialPanel(initialPanelData));
+        dispatch(setLoincFormSubPanels(subPanels));
+      })
+      .catch((error) => {
         console.error(error);
       });
   };

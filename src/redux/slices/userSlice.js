@@ -21,7 +21,8 @@ export const userSlice = createSlice({
       state.loading = action.payload;
     },
     clearUser: (state) => {
-      state.userData = initialState;
+      state.userData = initialState.userData;
+      state.error = initialState.error;
     },
     setUserError: (state, action) => {
       state.error = action.payload;
