@@ -108,12 +108,12 @@ const HomeScreen = () => {
   };
 
   const handleClickTest = () => {
-    alert("Clicked!");
+    alert("Button clicked!");
   };
 
   return (
     <div>
-      {patient.loading || user.loading ? (
+      {patient.loading || user.loading || loincForm.loading ? (
         <LoadingIndicator text="Loading..." />
       ) : (
         <>
