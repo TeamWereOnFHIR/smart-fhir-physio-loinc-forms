@@ -21,7 +21,8 @@ export const patientSlice = createSlice({
       state.loading = action.payload;
     },
     clearPatient: (state) => {
-      state.patientData = initialState;
+      state.patientData = initialState.patientData;
+      state.error = initialState.patientData;
     },
     setPatientError: (state, action) => {
       state.error = action.payload;
