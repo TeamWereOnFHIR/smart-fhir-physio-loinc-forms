@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { initErrorState } from "@common/globalConstants";
 
 const initialState = {
   formData: undefined,
   initialPanel: {},
   subPanels: [],
   loading: true,
-  error: undefined,
+  error: initErrorState,
 };
 
 /**
@@ -26,12 +27,13 @@ export const loincFormSlice = createSlice({
       state.formData = initialState.formData;
       state.initialPanel = initialState.initialPanel;
       state.subPanels = initialState.subPanels;
+      state.error = initialState.error;
     },
     setLoincFormDataError: (state, action) => {
       state.error = action.payload;
     },
     clearLoincFormDataError: (state) => {
-      state.error = undefined;
+      state.error = initialState.error;
     },
     setLoincFormInitialPanel: (state, action) => {
       state.initialPanel = action.payload;

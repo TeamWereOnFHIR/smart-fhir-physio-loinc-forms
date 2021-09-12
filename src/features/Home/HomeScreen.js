@@ -5,12 +5,6 @@ import {
   setLoincFormLoading,
   setLoincFormSubPanels,
 } from "@redux/slices/loincFormSlice";
-import {
-  setPatient,
-  setPatientError,
-  setPatientLoading,
-} from "@redux/slices/patientSlice";
-import { setUser, setUserError, setUserLoading } from "@redux/slices/userSlice";
 import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,6 +17,7 @@ import MessageBanner from "@components/MessageBanner/MessageBanner";
 import PatientBanner from "@features/PatientBanner/PatientBanner";
 import ProductReviewForm from "../FormHandler/FormHandler";
 import { buttonTypes } from "@components/Button/buttonConstants";
+import { initErrorState } from "@common/globalConstants";
 
 const HomeScreen = () => {
   // Fhir Client
@@ -46,45 +41,9 @@ const HomeScreen = () => {
    */
   useEffect(() => {
     fhirAPIService.getPatientFromFhir();
-    getUserFromFhir();
+    fhirAPIService.getUserFromFhir();
     getQuestionnaire();
   }, []);
-
-  // #TODO: Make Fhir Service
-  const getPatientFromFhir = async () => {
-    fhir.patient
-      .read()
-      .then((data) => {
-        dispatch(setPatient(data));
-        dispatch(setPatientLoading(false));
-        if (patient.error) {
-          dispatch(setPatientError(""));
-        }
-      })
-      .catch((error) => {
-        dispatch(setPatientError(error));
-        // Temporary
-        console.error(error);
-      });
-  };
-
-  const getUserFromFhir = async () => {
-    fhir.user
-      .read()
-      .then((data) => {
-        dispatch(setUser(data));
-        dispatch(setUserLoading(false));
-        if (user.error) {
-          dispatch(setUserError(""));
-        }
-      })
-      .catch((error) => {
-        dispatch(setUserError(error));
-        // Temporary
-        console.error(error);
-        dispatch(setUserLoading(false));
-      });
-  };
 
   const getQuestionnaire = async () => {
     const url = FhirApiUrl.loincPhysioFormURL;
@@ -93,7 +52,7 @@ const HomeScreen = () => {
       .then((data) => {
         dispatch(setLoincFormData(data));
         if (loincForm.error) {
-          dispatch(setLoincFormDataError(""));
+          dispatch(setLoincFormDataError(initErrorState));
         }
         const initialPanelItems = data.item.filter(
           (item) => item.type !== "group"
@@ -127,18 +86,24 @@ const HomeScreen = () => {
           <PatientBanner patientData={patient.patientData} />
 
           {/* Warning Messages */}
-          {patient.error && (
-            <MessageBanner type="warning" title="Patient Error">
+          {patient.error.message && (
+            <MessageBanner
+              type="warning"
+              title={`Patient ${patient.error.name}`}
+            >
               {patient.error.message}
             </MessageBanner>
           )}
-          {user.error && (
-            <MessageBanner type="warning" title="User Error">
+          {user.error.message && (
+            <MessageBanner type="warning" title={`User ${user.error.name}`}>
               {user.error.message}
             </MessageBanner>
           )}
-          {loincForm.error && (
-            <MessageBanner type="warning" title="Form Error">
+          {loincForm.error.message && (
+            <MessageBanner
+              type="warning"
+              title={`Form ${loincForm.error.name}`}
+            >
               {loincForm.error.message}
             </MessageBanner>
           )}
