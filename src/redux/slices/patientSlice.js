@@ -16,7 +16,6 @@ export const patientSlice = createSlice({
   reducers: {
     setPatient: (state, action) => {
       state.patientData = action.payload;
-      state.loading = false;
     },
     setPatientLoading: (state, action) => {
       state.loading = action.payload;

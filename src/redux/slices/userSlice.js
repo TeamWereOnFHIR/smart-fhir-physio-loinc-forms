@@ -16,7 +16,6 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.userData = action.payload;
-      state.loading = false;
     },
     setUserLoading: (state, action) => {
       state.loading = action.payload;

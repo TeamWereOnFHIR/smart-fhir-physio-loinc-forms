@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
 import { initErrorState } from "@common/globalConstants";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   formData: undefined,
@@ -18,7 +18,6 @@ export const loincFormSlice = createSlice({
   reducers: {
     setLoincFormData: (state, action) => {
       state.formData = action.payload;
-      state.loading = false;
     },
     setLoincFormLoading: (state, action) => {
       state.loading = action.payload;
