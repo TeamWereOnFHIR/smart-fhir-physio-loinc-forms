@@ -18,7 +18,7 @@ const MessageBanner = (props) => {
   const type = props.type === "info" ? infoBanner : warningBanner;
 
   return (
-    <div className="flex gap-4 bg-red-100 p-4 rounded-md">
+    <div className="flex gap-4 bg-red-100 mt-4 p-4 rounded-md">
       <div className="w-max">
         <div
           className={`h-12 w-12 flex from-${type.colour}-100 to-${type.colour}-300 text-${type.colour}-700`}
