@@ -1,23 +1,14 @@
-import {
-  setLoincFormData,
-  setLoincFormDataError,
-  setLoincFormInitialPanel,
-  setLoincFormLoading,
-  setLoincFormSubPanels,
-} from "@redux/slices/loincFormSlice";
 import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@components/Button/Button";
 import FhirAPIService from "@services/fhir/FhirAPIService";
-import { FhirApiUrl } from "@services/constants";
 import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import LoadingIndicator from "@components/LoadingIndicator/LoadingIndicator";
 import MessageBanner from "@components/MessageBanner/MessageBanner";
 import PatientBanner from "@features/PatientBanner/PatientBanner";
 import ProductReviewForm from "../FormHandler/FormHandler";
 import { buttonTypes } from "@components/Button/buttonConstants";
-import { initErrorState } from "@common/globalConstants";
 
 const HomeScreen = () => {
   // Fhir Client
@@ -42,36 +33,8 @@ const HomeScreen = () => {
   useEffect(() => {
     fhirAPIService.getPatientFromFhir();
     fhirAPIService.getUserFromFhir();
-    getQuestionnaire();
+    fhirAPIService.getQuestionnaire();
   }, []);
-
-  const getQuestionnaire = async () => {
-    const url = FhirApiUrl.loincPhysioFormURL;
-    fhir
-      .request(url)
-      .then((data) => {
-        dispatch(setLoincFormData(data));
-        if (loincForm.error) {
-          dispatch(setLoincFormDataError(initErrorState));
-        }
-        const initialPanelItems = data.item.filter(
-          (item) => item.type !== "group"
-        );
-        const subPanels = data.item.filter((item) => item.type === "group");
-        const initialPanelData = {
-          id: data.id,
-          title: data.title,
-          item: initialPanelItems,
-        };
-        dispatch(setLoincFormInitialPanel(initialPanelData));
-        dispatch(setLoincFormSubPanels(subPanels));
-      })
-      .catch((error) => {
-        console.error(error);
-        dispatch(setLoincFormDataError(error));
-        dispatch(setLoincFormLoading(false));
-      });
-  };
 
   const handleClickTest = () => {
     alert("Button clicked!");
