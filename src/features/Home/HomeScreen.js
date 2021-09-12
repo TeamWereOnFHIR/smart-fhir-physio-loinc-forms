@@ -33,7 +33,7 @@ const HomeScreen = () => {
   useEffect(() => {
     fhirAPIService.getPatientFromFhir();
     fhirAPIService.getUserFromFhir();
-    fhirAPIService.getQuestionnaire();
+    fhirAPIService.getLoincQuestionnaire();
   }, []);
 
   const handleClickTest = () => {
