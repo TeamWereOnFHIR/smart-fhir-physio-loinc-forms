@@ -2,6 +2,7 @@ import {
   setLoincFormData,
   setLoincFormDataError,
   setLoincFormInitialPanel,
+  setLoincFormLoading,
   setLoincFormSubPanels,
 } from "@redux/slices/loincFormSlice";
 import {
@@ -14,9 +15,11 @@ import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@components/Button/Button";
+import FhirAPIService from "@services/fhir/FhirAPIService";
 import { FhirApiUrl } from "@services/constants";
 import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import LoadingIndicator from "@components/LoadingIndicator/LoadingIndicator";
+import MessageBanner from "@components/MessageBanner/MessageBanner";
 import PatientBanner from "@features/PatientBanner/PatientBanner";
 import ProductReviewForm from "../FormHandler/FormHandler";
 import { buttonTypes } from "@components/Button/buttonConstants";
@@ -25,6 +28,7 @@ const HomeScreen = () => {
   // Fhir Client
   const context = useContext(FhirClientContext);
   const fhir = context.client;
+  const fhirAPIService = new FhirAPIService(fhir);
 
   // Redux
   const dispatch = useDispatch();
@@ -41,7 +45,7 @@ const HomeScreen = () => {
    * Read patient.
    */
   useEffect(() => {
-    getPatientFromFhir();
+    fhirAPIService.getPatientFromFhir();
     getUserFromFhir();
     getQuestionnaire();
   }, []);
@@ -78,6 +82,7 @@ const HomeScreen = () => {
         dispatch(setUserError(error));
         // Temporary
         console.error(error);
+        dispatch(setUserLoading(false));
       });
   };
 
@@ -104,6 +109,8 @@ const HomeScreen = () => {
       })
       .catch((error) => {
         console.error(error);
+        dispatch(setLoincFormDataError(error));
+        dispatch(setLoincFormLoading(false));
       });
   };
 
@@ -118,6 +125,24 @@ const HomeScreen = () => {
       ) : (
         <>
           <PatientBanner patientData={patient.patientData} />
+
+          {/* Warning Messages */}
+          {patient.error && (
+            <MessageBanner type="warning" title="Patient Error">
+              {patient.error.message}
+            </MessageBanner>
+          )}
+          {user.error && (
+            <MessageBanner type="warning" title="User Error">
+              {user.error.message}
+            </MessageBanner>
+          )}
+          {loincForm.error && (
+            <MessageBanner type="warning" title="Form Error">
+              {loincForm.error.message}
+            </MessageBanner>
+          )}
+
           <main>
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
               {/* Replace this with actual components */}
