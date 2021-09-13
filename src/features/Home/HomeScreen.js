@@ -1,22 +1,11 @@
-import {
-  setLoincFormData,
-  setLoincFormDataError,
-  setLoincFormInitialPanel,
-  setLoincFormSubPanels,
-} from "@redux/slices/loincFormSlice";
-import {
-  setPatient,
-  setPatientError,
-  setPatientLoading,
-} from "@redux/slices/patientSlice";
-import { setUser, setUserError, setUserLoading } from "@redux/slices/userSlice";
 import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@components/Button/Button";
-import { FhirApiUrl } from "@services/constants";
+import FhirAPIService from "@services/fhir/FhirAPIService";
 import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import LoadingIndicator from "@components/LoadingIndicator/LoadingIndicator";
+import MessageBanner from "@components/MessageBanner/MessageBanner";
 import PatientBanner from "@features/PatientBanner/PatientBanner";
 import ProductReviewForm from "../FormHandler/FormHandler";
 import { buttonTypes } from "@components/Button/buttonConstants";
@@ -25,6 +14,7 @@ const HomeScreen = () => {
   // Fhir Client
   const context = useContext(FhirClientContext);
   const fhir = context.client;
+  const fhirAPIService = new FhirAPIService(fhir);
 
   // Redux
   const dispatch = useDispatch();
@@ -41,71 +31,10 @@ const HomeScreen = () => {
    * Read patient.
    */
   useEffect(() => {
-    getPatientFromFhir();
-    getUserFromFhir();
-    getQuestionnaire();
+    fhirAPIService.getPatientFromFhir();
+    fhirAPIService.getUserFromFhir();
+    fhirAPIService.getLoincQuestionnaire();
   }, []);
-
-  // #TODO: Make Fhir Service
-  const getPatientFromFhir = async () => {
-    fhir.patient
-      .read()
-      .then((data) => {
-        dispatch(setPatient(data));
-        dispatch(setPatientLoading(false));
-        if (patient.error) {
-          dispatch(setPatientError(""));
-        }
-      })
-      .catch((error) => {
-        dispatch(setPatientError(error));
-        // Temporary
-        console.error(error);
-      });
-  };
-
-  const getUserFromFhir = async () => {
-    fhir.user
-      .read()
-      .then((data) => {
-        dispatch(setUser(data));
-        dispatch(setUserLoading(false));
-        if (user.error) {
-          dispatch(setUserError(""));
-        }
-      })
-      .catch((error) => {
-        dispatch(setUserError(error));
-        // Temporary
-        console.error(error);
-      });
-  };
-
-  const getQuestionnaire = async () => {
-    const url = FhirApiUrl.loincPhysioFormURL;
-    fhir
-      .request(url)
-      .then((data) => {
-        dispatch(setLoincFormData(data));
-        if (loincForm.error) {
-          dispatch(setLoincFormDataError(""));
-        }
-        const initialPanelItems = data.item.filter(
-          (item) => item.type !== "group"
-        );
-        const subPanels = data.item.filter((item) => item.type === "group");
-        const initialPanelData = {
-          id: data.id,
-          title: data.title,
-          item: initialPanelItems,
-        };
-        dispatch(setLoincFormInitialPanel(initialPanelData));
-        dispatch(setLoincFormSubPanels(subPanels));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   const handleClickTest = () => {
     alert("Button clicked!");
@@ -118,6 +47,30 @@ const HomeScreen = () => {
       ) : (
         <>
           <PatientBanner patientData={patient.patientData} />
+
+          {/* Warning Messages */}
+          {patient.error.message && (
+            <MessageBanner
+              type="warning"
+              title={`Patient ${patient.error.name}`}
+            >
+              {patient.error.message}
+            </MessageBanner>
+          )}
+          {user.error.message && (
+            <MessageBanner type="warning" title={`User ${user.error.name}`}>
+              {user.error.message}
+            </MessageBanner>
+          )}
+          {loincForm.error.message && (
+            <MessageBanner
+              type="warning"
+              title={`Form ${loincForm.error.name}`}
+            >
+              {loincForm.error.message}
+            </MessageBanner>
+          )}
+
           <main>
             <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
               {/* Replace this with actual components */}
