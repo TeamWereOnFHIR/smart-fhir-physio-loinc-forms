@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { initErrorState } from "@common/globalConstants";
 
 const initialState = {
   userData: undefined,
   loading: true,
-  error: undefined,
+  error: initErrorState,
 };
 
 /**
@@ -15,19 +16,19 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.userData = action.payload;
-      state.loading = false;
     },
     setUserLoading: (state, action) => {
       state.loading = action.payload;
     },
     clearUser: (state) => {
-      state.userData = initialState;
+      state.userData = initialState.userData;
+      state.error = initialState.error;
     },
     setUserError: (state, action) => {
       state.error = action.payload;
     },
     clearUserError: (state) => {
-      state.error = undefined;
+      state.error = initialState.error;
     },
   },
 });
