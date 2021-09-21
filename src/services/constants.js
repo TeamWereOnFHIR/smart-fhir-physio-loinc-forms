@@ -6,3 +6,19 @@ export const FhirServiceConstants = {
     "launch launch/patient patient/*.* offline_access openid fhirUser",
   redirectUri: "/home",
 };
+
+export const FhirResources = {
+  // Resources
+  questionnaire: "Questionnaire",
+
+  /**
+   * Resource Ids: [server][resourceType][Name]Id
+   *  sandbox: server - R4 Smarthealthit sandbox
+   *  Q: resourceType - Questionnaire
+   */
+  sandboxQLoincPhysioFormId: "1346978",
+};
+
+export const FhirApiUrl = {
+  loincPhysioFormURL: `${FhirResources.questionnaire}/${FhirResources.sandboxQLoincPhysioFormId}`,
+};
