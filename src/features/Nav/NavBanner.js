@@ -1,5 +1,7 @@
 import { Disclosure } from "@headlessui/react";
 import { navigation } from "./navigation";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
+import logo from "../../assets/logo.png";
 
 const NavBanner = () => {
   const navItemCurrentClasses =
@@ -17,7 +19,7 @@ const NavBanner = () => {
                 <div className="flex items-center">
                   {/* Logo */}
                   <div className="flex-shrink-0">
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-12 w-12"
                       fill="#e25822"
@@ -36,15 +38,19 @@ const NavBanner = () => {
                         strokeWidth={2}
                         d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
                       />
-                    </svg>
+                    </svg> */}
+                    {/* <Logo /> */}
+                    {/* <img src={require=('../../assets/logo.svg').default} /> */}
+                    
+                    <img className="object-contain h-14 pb-2" src={logo} />
                   </div>
                   <h1 className="font-bold text-2xl text-white .tracking-widest pl-2">
-                    We're on FHIR
+                    Phizzforms
                   </h1>
-                  {/* Navigation */}
+                  {/* Navigation - Currently not needed */}
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
-                      {navigation.map((item) => (
+                      {/* {navigation.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
@@ -57,7 +63,7 @@ const NavBanner = () => {
                         >
                           {item.name}
                         </a>
-                      ))}
+                      ))} */}
                     </div>
                   </div>
                 </div>
