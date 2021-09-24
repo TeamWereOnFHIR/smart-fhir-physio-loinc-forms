@@ -1,13 +1,9 @@
-import {
-  getLoincInitialPanelItems,
-  getLoincSubPanels,
-} from "../../common/utils/fhirUtils";
+import { getLoincInitialPanelItems, getLoincSubPanels } from "@utils/fhirUtils";
 import {
   setLoincFormData,
   setLoincFormDataError,
-  setLoincFormInitialPanel,
   setLoincFormLoading,
-  setLoincFormSubPanels,
+  setLoincFormPanels,
 } from "@redux/slices/loincFormSlice";
 import {
   setPatient,
@@ -38,7 +34,7 @@ class FhirAPIService {
   /**
    * Reads Patient from connected Fhir Client.
    *
-   * @returns User object with data.
+   * Stores in redux.
    */
   getPatientFromFhir = async () => {
     const patientState = store.getState().patient;
@@ -62,6 +58,11 @@ class FhirAPIService {
       });
   };
 
+  /**
+   * Reads user data from connected Fhir Client.
+   *
+   * Stores in redux.
+   */
   getUserFromFhir = async () => {
     const userState = store.getState().user;
 
@@ -84,6 +85,13 @@ class FhirAPIService {
       });
   };
 
+  /**
+   * Reads questionnaire data with Fhir Client.
+   *
+   * Extracts initial panel fields, and subpanel groups.
+   *
+   * Stores in redux.
+   */
   getLoincQuestionnaire = async () => {
     const url = FhirApiUrl.loincPhysioFormURL;
     const loincFormState = store.getState().loincForm;
@@ -96,13 +104,15 @@ class FhirAPIService {
 
         // Store Panel Data
         const initialPanelData = {
-          id: data.id,
-          title: data.title,
+          linkId: data.code[0].code,
+          text: data.title,
+          type: "group",
+          required: true,
           item: getLoincInitialPanelItems(data?.item),
         };
-        const subPanels = getLoincSubPanels(data?.item);
-        store.dispatch(setLoincFormInitialPanel(initialPanelData));
-        store.dispatch(setLoincFormSubPanels(subPanels));
+        const panels = getLoincSubPanels(data?.item);
+        panels.unshift(initialPanelData);
+        store.dispatch(setLoincFormPanels(panels));
 
         // Cleanup
         if (loincFormState.error.message) {
