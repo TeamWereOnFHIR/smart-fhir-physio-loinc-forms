@@ -232,13 +232,13 @@ const HomeScreen = () => {
                   buttonType={buttonTypes.primary}
                   handleClick={handleClickTest}
                 >
-                  Primary Button
+                  Submit
                 </Button>
                 <Button
                   buttonType={buttonTypes.secondary}
                   handleClick={handleClickTest}
                 >
-                  Secondary Button
+                  Print
                 </Button>
               </div>
             </div>
