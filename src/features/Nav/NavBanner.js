@@ -1,6 +1,4 @@
 import { Disclosure } from "@headlessui/react";
-import { navigation } from "./navigation";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
 import logo from "../../assets/logo.png";
 
 const NavBanner = () => {
@@ -11,7 +9,7 @@ const NavBanner = () => {
 
   return (
     <div>
-      <Disclosure as="nav" className="bg-green-400 shadow-2xl">
+      <Disclosure as="nav" className="bg-green-400 shadow-xl">
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,7 +39,7 @@ const NavBanner = () => {
                     </svg> */}
                     {/* <Logo /> */}
                     {/* <img src={require=('../../assets/logo.svg').default} /> */}
-                    
+
                     <img className="object-contain h-14 pb-2" src={logo} />
                   </div>
                   <h1 className="font-bold text-2xl text-white .tracking-widest pl-2">
