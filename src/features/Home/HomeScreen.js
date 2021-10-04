@@ -34,7 +34,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen">
       {patient.loading || user.loading || loincForm.loading ? (
         <LoadingIndicator text="Loading..." />
       ) : (
