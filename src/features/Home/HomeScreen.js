@@ -5,7 +5,6 @@ import { FhirClientContext } from "@services/fhir/FhirClientContext";
 import FormHandler from "@features/Form/FormHandler/FormHandler";
 import LoadingIndicator from "@components/LoadingIndicator/LoadingIndicator";
 import MessageBanner from "@components/MessageBanner/MessageBanner";
-import PatientBanner from "@features/PatientBanner/PatientBanner";
 import { useSelector } from "react-redux";
 
 const HomeScreen = () => {
@@ -34,12 +33,12 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen">
       {patient.loading || user.loading || loincForm.loading ? (
         <LoadingIndicator text="Loading..." />
       ) : (
         <>
-          <PatientBanner patientData={patient.patientData} />
+          {/* <PatientBanner patientData={patient.patientData} /> */}
 
           {/* Warning Messages */}
           {patient.error.message && (
