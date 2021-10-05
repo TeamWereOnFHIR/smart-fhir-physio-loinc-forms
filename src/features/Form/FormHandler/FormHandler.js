@@ -1,18 +1,16 @@
-import "react-datepicker/dist/react-datepicker-cssmodules.css";
-
-import * as Yup from "yup";
-
+import Button from "@components/Button/Button";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
-
-import Button from "@components/Button/Button";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import * as Yup from "yup";
 import FormNav from "../FormNav/FormNav";
 
 const FormHandler = () => {
   const initialValues = {
     date: new Date(),
     product: "",
+    Patient: "PATIENT",
   };
 
   // Control navigation of form, updates select and panel.
@@ -105,7 +103,7 @@ const FormHandler = () => {
                         <Field
                           as="input"
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          name="Patient identifier [76435-7]"
+                          name="Patient"
                           id="Patient identifier [76435-7]"
                           type="text"
                           placeholder="Type a Value"

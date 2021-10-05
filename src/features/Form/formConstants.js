@@ -2,6 +2,7 @@
  * Form panel constants.
  *
  * Key = linkId
+ *    id = linkId
  *    title = Name of panel
  *    selectId = Select nav id in component
  *    panelId = Panel id in component
@@ -55,4 +56,15 @@ export const Panels = {
     selectId: "select-100804",
     panelId: "panel-100804",
   },
+};
+
+/**
+ * Initial form values.
+ *
+ * [linkId]-[Text]
+ *
+ * We use linkId as per Fhir field linkIds.
+ */
+export const formInitialValues = {
+  "75777-Patient-identifier": "lasdjflajskdf",
 };
