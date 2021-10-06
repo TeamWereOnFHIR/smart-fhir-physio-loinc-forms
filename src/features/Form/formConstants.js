@@ -87,11 +87,11 @@ export const initialPanelValues = {
   "76446-4": "",
   "89189-5": "",
   "89188-7": "",
-  "89188-7": "",
+  "57828-6": "",
   "92725-1": "",
 };
 
-export const GlobalMeasureOfPhysicalFunctionValues = {
+export const globalMeasureOfPhysicalFunctionValues = {
   "79529-4": "",
   "79530-2": "",
   "79531-0": "",
@@ -189,4 +189,14 @@ export const billingInfoValues = {
   "89265-3": "",
   "89178-8": "",
   "76428-2": "",
+};
+
+export const initialValues = {
+  InitialPanel: initialPanelValues,
+  GlobalPhysicalFuncPanel: globalMeasureOfPhysicalFunctionValues,
+  SelfCareMobilityPanel: selfcareAndMobilityValues,
+  PtGoalsValues: ptGoalsValues,
+  PlannedInterventionPanel: plannedInterventionValues,
+  InterventionServicesPanel: interventionServicesValues,
+  BillingInfoPanel: billingInfoValues,
 };
