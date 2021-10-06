@@ -65,15 +65,7 @@ export const Panels = {
  *
  * We use linkId as per Fhir field linkIds.
  */
-export const initialValues = {
-  InitialPanel: initialPanelValues,
-  GlobalPhysicalFuncPanel: globalMeasureOfPhysicalFunctionValues,
-  SelfCareMobilityPanel: selfcareAndMobilityValues,
-  PtGoalsValues: ptGoalsValues,
-  PlannedInterventionPanel: plannedInterventionValues,
-  InterventionServicesPanel: interventionServicesValues,
-  billingInfoValues: billingInfoValues,
-};
+
 export const initialPanelValues = {
   "76435-7": "",
   "76698-0": "",
@@ -95,7 +87,7 @@ export const initialPanelValues = {
   "76446-4": "",
   "89189-5": "",
   "89188-7": "",
-  "89188-7": "",
+  "57828-6": "",
   "92725-1": "",
 };
 
@@ -197,4 +189,14 @@ export const billingInfoValues = {
   "89265-3": "",
   "89178-8": "",
   "76428-2": "",
+};
+
+export const initialValues = {
+  InitialPanel: initialPanelValues,
+  GlobalPhysicalFuncPanel: globalMeasureOfPhysicalFunctionValues,
+  SelfCareMobilityPanel: selfcareAndMobilityValues,
+  PtGoalsValues: ptGoalsValues,
+  PlannedInterventionPanel: plannedInterventionValues,
+  InterventionServicesPanel: interventionServicesValues,
+  BillingInfoPanel: billingInfoValues,
 };
