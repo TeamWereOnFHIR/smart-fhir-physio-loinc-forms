@@ -1,9 +1,12 @@
 export const RANDOM_USER_API_PATH = "https://randomuser.me/api/";
 
+const baseApiCode = "eyJoIjoiMSIsImkiOiIxIiwiaiI6IjEifQ";
+const apiCode =
+  "eyJoIjoiMSIsImIiOiI2N2NiZjA5MC00ZGRiLTQ3OTktOTlmZi1hMjhhYmUyNzQwYjEiLCJpIjoiMSIsImoiOiIxIiwiZSI6ImU0NDNhYzU4LThlY2UtNDM4NS04ZDU1LTc3NWMxYjhmM2EzNyJ9";
 export const FhirServiceConstants = {
-  sandboxApi: `https://launch.smarthealthit.org/v/r4/sim/eyJoIjoiMSIsImkiOiIxIiwiaiI6IjEifQ/fhir`,
+  sandboxApi: `https://launch.smarthealthit.org/v/r4/sim/${apiCode}/fhir`,
   sandboxScopes:
-    "launch launch/patient patient/*.* offline_access openid fhirUser",
+    "launch patient/*.* user/*.* offline_access openid fhirUser profile",
   redirectUri: "/home",
 };
 
