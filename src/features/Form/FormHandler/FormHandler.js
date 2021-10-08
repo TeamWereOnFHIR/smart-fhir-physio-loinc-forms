@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import * as Yup from "yup";
-import { initialValues } from "../formConstants";
+import { initialValues, Panels } from "../formConstants";
 import FormNav from "../FormNav/FormNav";
+import FormPanel from "../FormPanel/FormPanel";
 
 const FormHandler = () => {
   // Control navigation of form, updates select and panel.
@@ -48,38 +49,37 @@ const FormHandler = () => {
               and seeing how formik works with sub components */}
                 {isPanelActive("panel-72989") ? (
                   <div className="bg-white w-6/12 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    DUMMY PANEL Global measure of physical function active
-                    {/* <FormPanel id="panel-72989" linkId="72989" /> */}
+                    <FormPanel panel={Panels.GlobalPhysicalFuncPanel} />
                   </div>
                 ) : null}
                 {isPanelActive("panel-72988") ? (
                   <div className="bg-white w-6/12 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    DUMMY PANEL Condition or population specific active
+                    <FormPanel panel={Panels.ConditionPopulationPanel} />
                   </div>
                 ) : null}
                 {isPanelActive("panel-72990") ? (
                   <div className="bg-white w-6/12 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    DUMMY PANEL Self-care and mobility active
+                    <FormPanel panel={Panels.SelfCareMobilityPanel} />
                   </div>
                 ) : null}
                 {isPanelActive("panel-111748") ? (
                   <div className="bg-white w-6/12 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    DUMMY PANEL Patient goals active
+                    <FormPanel panel={Panels.PatientGoalsPanel} />
                   </div>
                 ) : null}
                 {isPanelActive("panel-111728") ? (
                   <div className="bg-white w-6/12 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    DUMMY PANEL Planned intervention or services active
+                    <FormPanel panel={Panels.PlannedInterventionPanel} />
                   </div>
                 ) : null}
                 {isPanelActive("panel-100794") ? (
                   <div className="bg-white w-6/12 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    DUMMY PANEL Intervention or services provided active
+                    <FormPanel panel={Panels.InterventionServicesPanel} />
                   </div>
                 ) : null}
                 {isPanelActive("panel-100804") ? (
                   <div className="bg-white w-6/12 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    DUMMY PANEL Patient initial visit details active
+                    <FormPanel panel={Panels.BillingPanel} />
                   </div>
                 ) : null}
 
