@@ -4,15 +4,10 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import * as Yup from "yup";
+import { initialValues } from "../formConstants";
 import FormNav from "../FormNav/FormNav";
 
 const FormHandler = () => {
-  const initialValues = {
-    date: new Date(),
-    product: "",
-    Patient: "PATIENT",
-  };
-
   // Control navigation of form, updates select and panel.
   const [activePanel, setActivePanel] = useState("panel-76453-0");
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
@@ -105,8 +100,8 @@ const FormHandler = () => {
                           <Field
                             as="input"
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            name="Patient"
-                            id="Patient identifier [76435-7]"
+                            name="InitialPanel.76435-7"
+                            id="76435-7"
                             type="text"
                             placeholder="Type a Value"
                             required
