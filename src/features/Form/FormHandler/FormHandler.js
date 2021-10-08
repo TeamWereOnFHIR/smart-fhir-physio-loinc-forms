@@ -3,9 +3,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
-import * as Yup from "yup";
 import FormNav from "../FormNav/FormNav";
-
+import validationSchema from "./validationSchema";
 const FormHandler = () => {
   const initialValues = {
     date: new Date(),
@@ -18,7 +17,7 @@ const FormHandler = () => {
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
 
   const onSubmit = (values) => {
-    //  alert(JSON.stringify(values, null, 2));
+    alert(JSON.stringify(values, null, 2));
   };
 
   const onSelect = (e) => {
@@ -30,7 +29,6 @@ const FormHandler = () => {
 
   const isPanelActive = (id) => id === activePanel;
 
-  const validationSchema = Yup.object().shape({});
   const renderError = (message) => <p className="help is-danger">{message}</p>;
 
   return (
