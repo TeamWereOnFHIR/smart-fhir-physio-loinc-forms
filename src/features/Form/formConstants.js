@@ -66,6 +66,53 @@ export const Panels = {
  * We use linkId as per Fhir field linkIds.
  */
 
+export const kneeInjuryValues = {
+  "82325-2": "",
+  "82332-8": "",
+};
+export const neckDisabilityValues = {
+  "82227-0": "",
+  "82228-8": "",
+  "82229-6": "",
+  "82230-4": "",
+  "82231-2": "",
+  "82232-0": "",
+  "82233-8": "",
+  "82234-6": "",
+  "82235-3": "",
+  "82236-1": "",
+  "82237-9": "",
+};
+export const patientReportOutcomesValues = {
+  "89195-2": "",
+  "89194-5": "",
+  "89193-7": "",
+};
+export const performanceMesureValues = {
+  "89190-3": "",
+  "89191-1": "",
+  "89192-9": "",
+};
+export const painValues = {
+  "82326-0": "",
+  "82327-8": "",
+  "82328-6": "",
+  "82329-4": "",
+};
+export const dailyValues = {
+  "82330-2": "",
+  "82331-0": "",
+};
+export const kneeInjuryPanels = {
+  PainPanel: painValues,
+  DailyLiving: dailyValues,
+};
+export const conditionPopulationPanels = {
+  KneeInjuryPanel: kneeInjuryPanels,
+  NeckDisabilityPanel: neckDisabilityValues,
+  PatientReportedOutcomesPanel: patientReportOutcomesValues,
+  PerformanceMesurePanel: performanceMesureValues,
+};
 export const initialPanelValues = {
   "76435-7": "",
   "76698-0": "",
@@ -195,8 +242,9 @@ export const initialValues = {
   InitialPanel: initialPanelValues,
   GlobalPhysicalFuncPanel: globalMeasureOfPhysicalFunctionValues,
   SelfCareMobilityPanel: selfcareAndMobilityValues,
-  PtGoalsValues: ptGoalsValues,
+  PatientGoalsPanel: ptGoalsValues,
   PlannedInterventionPanel: plannedInterventionValues,
   InterventionServicesPanel: interventionServicesValues,
   BillingInfoPanel: billingInfoValues,
+  ConditionPopulationPanel: conditionPopulationPanels,
 };
