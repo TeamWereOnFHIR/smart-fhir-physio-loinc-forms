@@ -80,9 +80,9 @@ const FormPanel = ({ panel }) => {
    */
   const renderTextInput = (item) => {
     const placeholderText =
-      item.type === formTypes.fhir.string
-        ? formPlaceholder.text
-        : formPlaceholder.number;
+      item.type === formTypes.fhir.number
+        ? formPlaceholder.number
+        : formPlaceholder.text;
     return (
       <div key={item.code[0].code} className={panelStyles.fieldDiv}>
         <label className={panelStyles.label}>
@@ -107,28 +107,33 @@ const FormPanel = ({ panel }) => {
    */
   const renderSelect = (item) => {
     const placeholderText = formPlaceholder.select;
-    return (
-      <div key={item.code[0].code} className={panelStyles.fieldDiv}>
-        <label className={panelStyles.label}>
-          {`${item.text} [${item.code[0].code}]`}
-        </label>
-        <Field
-          as="select"
-          className={panelStyles.inputField}
-          name={`${panelFieldKey}.${item.code[0].code}`}
-          id={`${item.code[0].code}`}
-        >
-          <option value={""}>{placeholderText}</option>
-          {item.answerOption.map((option) => (
-            <option
-              className={panelStyles.options}
-              key={option.valueCoding.code}
-              value={`${option.valueCoding.code}`}
-            >{`${option.valueCoding.code} - ${option.valueCoding.display}`}</option>
-          ))}
-        </Field>
-      </div>
-    );
+
+    if (item.answerOption) {
+      return (
+        <div key={item.code[0].code} className={panelStyles.fieldDiv}>
+          <label className={panelStyles.label}>
+            {`${item.text} [${item.code[0].code}]`}
+          </label>
+          <Field
+            as="select"
+            className={panelStyles.inputField}
+            name={`${panelFieldKey}.${item.code[0].code}`}
+            id={`${item.code[0].code}`}
+          >
+            <option value={""}>{placeholderText}</option>
+            {item.answerOption.map((option) => (
+              <option
+                className={panelStyles.options}
+                key={option.valueCoding.code}
+                value={`${option.valueCoding.code}`}
+              >{`${option.valueCoding.code} - ${option.valueCoding.display}`}</option>
+            ))}
+          </Field>
+        </div>
+      );
+    }
+    // No answer options due to custom options required.
+    return renderTextInput(item);
   };
 
   /**
