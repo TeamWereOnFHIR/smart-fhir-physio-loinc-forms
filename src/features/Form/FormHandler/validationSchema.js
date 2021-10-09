@@ -3,10 +3,10 @@ import * as Yup from "yup";
 
 /* Validation Schema for the form */
 const validationSchema = Yup.object().shape({
-  "": yup.string().required(),
-  "": yup.string().required(),
-  "": yup.string().required(),
-  "": yup.string().required(),
-  "": yup.string().required(),
+  // "": yup.string().required(),
+  // "": yup.string().required(),
+  // "": yup.string().required(),
+  // "": yup.string().required(),
+  // "": yup.string().required(),
 });
 export default validationSchema;
