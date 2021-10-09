@@ -80,9 +80,9 @@ const FormPanel = ({ panel }) => {
    */
   const renderTextInput = (item) => {
     const placeholderText =
-      item.type === formTypes.fhir.string
-        ? formPlaceholder.text
-        : formPlaceholder.number;
+      item.type === formTypes.fhir.number
+        ? formPlaceholder.number
+        : formPlaceholder.text;
     return (
       <div key={item.code[0].code} className={panelStyles.fieldDiv}>
         <label className={panelStyles.label}>
