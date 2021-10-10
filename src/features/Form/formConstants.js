@@ -10,60 +10,66 @@
 export const Panels = {
   InitialPanel: {
     id: "76453-0",
-    title: "Patient initial visit details",
+    key: "InitialPanel",
+    title: "Physical therapy initial visit [76453-0]",
     selectId: "select-76453-0",
     panelId: "panel-76453-0",
   },
   GlobalPhysicalFuncPanel: {
-    id: "72989",
-    title: "Global measure of physical function",
-    selectId: "select-72989",
-    panelId: "panel-72989",
+    id: "77574-2",
+    key: "GlobalPhysicalFuncPanel",
+    title: "Global measure of physical function [77574-2]",
+    selectId: "select-77574-2",
+    panelId: "panel-77574-2",
   },
   ConditionPopulationPanel: {
-    id: "72988",
-    title: "Condition or population specific",
-    selectId: "select-72988",
-    panelId: "panel-72988",
+    id: "77575-9",
+    key: "ConditionPopulationPanel",
+    title: "Condition or population specific [77575-9]",
+    selectId: "select-77575-9",
+    panelId: "panel-77575-9",
   },
   SelfCareMobilityPanel: {
-    id: "72990",
-    title: "Self-care and mobility",
-    selectId: "select-72990",
-    panelId: "panel-72990",
+    id: "77576-7",
+    key: "SelfCareMobilityPanel",
+    title: "Self-care and mobility [77576-7]",
+    selectId: "select-77576-7",
+    panelId: "panel-77576-7",
   },
   PatientGoalsPanel: {
-    id: "111748",
-    title: "Patient goals",
-    selectId: "select-111748",
-    panelId: "panel-111748",
+    id: "92562-8",
+    key: "PatientGoalsPanel",
+    title: "Patient goals [92562-8]",
+    selectId: "select-92562-8",
+    panelId: "panel-92562-8",
   },
   PlannedInterventionPanel: {
-    id: "111728",
-    title: "Planned intervention or services",
-    selectId: "select-111728",
-    panelId: "panel-111728",
+    id: "92566-9",
+    key: "PlannedInterventionPanel",
+    title: "Planned intervention or services [92566-9]",
+    selectId: "select-92566-9",
+    panelId: "panel-92566-9",
   },
   InterventionServicesPanel: {
-    id: "100794",
-    title: "Intervention or services provided",
-    selectId: "select-100794",
-    panelId: "panel-100794",
+    id: "89176-2",
+    key: "InterventionServicesPanel",
+    title: "Intervention or services provided [89176-2]",
+    selectId: "select-89176-2",
+    panelId: "panel-89176-2",
   },
   BillingPanel: {
-    id: "100804",
-    title: "Billing info",
-    selectId: "select-100804",
-    panelId: "panel-100804",
+    id: "89175-4",
+    key: "BillingPanel",
+    title: "Billing info [89175-4]",
+    selectId: "select-89175-4",
+    panelId: "panel-89175-4",
   },
 };
 
 /**
- * Initial form panel values for each panel
+ * Form initial values for each panel
  *
- * [linkId]
- *
- * We use linkId as per Fhir field linkIds.
+ * [linkId] - linkId matching fhir field.
  */
 
 export const kneeInjuryValues = {
@@ -247,4 +253,49 @@ export const initialValues = {
   InterventionServicesPanel: interventionServicesValues,
   BillingInfoPanel: billingInfoValues,
   ConditionPopulationPanel: conditionPopulationPanels,
+};
+
+/**
+ * Form field types. Values from fhir item types.
+ *
+ * Fhir: Fhir data types.
+ * Form: App data types for formik.
+ * DateTypeIds: Fields that should be converted to a date picker.
+ */
+export const formTypes = {
+  fhir: {
+    string: "string",
+    number: "decimal",
+    select: "choice",
+    group: "group",
+  },
+  form: {
+    string: "string",
+    text: "text",
+    number: "number",
+    select: "select",
+  },
+  dateTypeIds: ["76423-3"],
+};
+
+/**
+ * Form placeholder text for empty fields.
+ */
+export const formPlaceholder = {
+  text: "Enter a text value",
+  number: "Enter a numeric value",
+  select: "Select an option",
+  date: "Click to select a date",
+};
+
+/**
+ * Accessors for sub panel keys for formik values based on fhir id.
+ */
+export const subPanelKeys = {
+  "82324-5": "KneeInjuryPanel",
+  "86631-9": "KneeInjuryPanel.PainPanel",
+  "86632-7": "KneeInjuryPanel.DailyLiving",
+  "82226-2": "NeckDisabilityPanel",
+  "89196-0": "PatientReportedOutcomesPanel",
+  "89197-8": "PerformanceMesurePanel",
 };
