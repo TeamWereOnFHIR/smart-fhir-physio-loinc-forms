@@ -11,56 +11,56 @@ export const Panels = {
   InitialPanel: {
     id: "76453-0",
     key: "InitialPanel",
-    title: "Patient initial visit details",
+    title: "Physical therapy initial visit [76453-0]",
     selectId: "select-76453-0",
     panelId: "panel-76453-0",
   },
   GlobalPhysicalFuncPanel: {
     id: "77574-2",
     key: "GlobalPhysicalFuncPanel",
-    title: "Global measure of physical function",
+    title: "Global measure of physical function [77574-2]",
     selectId: "select-77574-2",
     panelId: "panel-77574-2",
   },
   ConditionPopulationPanel: {
     id: "77575-9",
     key: "ConditionPopulationPanel",
-    title: "Condition or population specific",
+    title: "Condition or population specific [77575-9]",
     selectId: "select-77575-9",
     panelId: "panel-77575-9",
   },
   SelfCareMobilityPanel: {
     id: "77576-7",
     key: "SelfCareMobilityPanel",
-    title: "Self-care and mobility",
+    title: "Self-care and mobility [77576-7]",
     selectId: "select-77576-7",
     panelId: "panel-77576-7",
   },
   PatientGoalsPanel: {
     id: "92562-8",
     key: "PatientGoalsPanel",
-    title: "Patient goals",
+    title: "Patient goals [92562-8]",
     selectId: "select-92562-8",
     panelId: "panel-92562-8",
   },
   PlannedInterventionPanel: {
     id: "92566-9",
     key: "PlannedInterventionPanel",
-    title: "Planned intervention or services",
+    title: "Planned intervention or services [92566-9]",
     selectId: "select-92566-9",
     panelId: "panel-92566-9",
   },
   InterventionServicesPanel: {
     id: "89176-2",
     key: "InterventionServicesPanel",
-    title: "Intervention or services provided",
+    title: "Intervention or services provided [89176-2]",
     selectId: "select-89176-2",
     panelId: "panel-89176-2",
   },
   BillingPanel: {
     id: "89175-4",
     key: "BillingPanel",
-    title: "Billing info",
+    title: "Billing info [89175-4]",
     selectId: "select-89175-4",
     panelId: "panel-89175-4",
   },
@@ -267,6 +267,7 @@ export const formTypes = {
     string: "string",
     number: "decimal",
     select: "choice",
+    group: "group",
   },
   form: {
     string: "string",
@@ -285,4 +286,16 @@ export const formPlaceholder = {
   number: "Enter a numeric value",
   select: "Select an option",
   date: "Click to select a date",
+};
+
+/**
+ * Accessors for sub panel keys for formik values based on fhir id.
+ */
+export const subPanelKeys = {
+  "82324-5": "KneeInjuryPanel",
+  "86631-9": "KneeInjuryPanel.PainPanel",
+  "86632-7": "KneeInjuryPanel.DailyLiving",
+  "82226-2": "NeckDisabilityPanel",
+  "89196-0": "PatientReportedOutcomesPanel",
+  "89197-8": "PerformanceMesurePanel",
 };
