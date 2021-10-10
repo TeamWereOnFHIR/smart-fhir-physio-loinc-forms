@@ -42,7 +42,7 @@ const NavBanner = () => {
 
                     <img className="object-contain h-14 pb-2" src={logo} />
                   </div>
-                  <h1 className="font-bold text-2xl text-white .tracking-widest pl-2">
+                  <h1 className="font-mono font-bold text-4xl text-green-900 .tracking-widest pl-2">
                     Phizzforms
                   </h1>
                   {/* Navigation - Currently not needed */}

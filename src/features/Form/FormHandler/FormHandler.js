@@ -76,16 +76,13 @@ const FormHandler = () => {
               <div className="w-full py-2">
                 {/* TODO: do better with button panel, alignment etc. */}
                 <div className="flex items-start flex-row space-x-4 justify-end flex-grow content-between bg-green-200 mr-9">
-                  <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"><Button buttonType="secondary">Print</Button></div>
+                  <Button buttonType="secondary">Print</Button>
                   <Button
                     buttonType="primary"
                     handleClick={formik.handleSubmit}
                   >
                     Submit
                   </Button>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    Submit
-                  </button>
                 </div>
               </div>
               {/* END MAIN FLEX */}
