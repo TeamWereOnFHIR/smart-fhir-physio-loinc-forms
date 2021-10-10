@@ -40,10 +40,10 @@ const FormHandler = () => {
         }}
       >
         {(formik) => (
-          <Form>
+          <Form className="bg-green-200">
             <div className="flex-1 flex-col items-center space-x-2">
               {/* START Row flex section for nav and form panels */}
-              <div className="flex items-start flex-row space-x-4 justify-center flex-grow">
+              <div className="flex items-start flex-row space-x-4 justify-center flex-grow bg-green-100">
                 <FormNav handleSelect={onSelect} activeSelect={activeSelect} />
                 {/* Render panels if selected in form nav. */}
                 {isPanelActive("panel-76453-0") ? (
@@ -73,16 +73,19 @@ const FormHandler = () => {
                 {/* END Form Panel and Form Nav */}
               </div>
               {/* Button Panel */}
-              <div className="bg-gray-200 w-full py-2">
+              <div className="w-full py-2">
                 {/* TODO: do better with button panel, alignment etc. */}
-                <div className="flex-row content-between">
-                  <Button buttonType="secondary">Print</Button>
+                <div className="flex items-start flex-row space-x-4 justify-end flex-grow content-between bg-green-200 mr-9">
+                  <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"><Button buttonType="secondary">Print</Button></div>
                   <Button
                     buttonType="primary"
                     handleClick={formik.handleSubmit}
                   >
                     Submit
                   </Button>
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Submit
+                  </button>
                 </div>
               </div>
               {/* END MAIN FLEX */}
