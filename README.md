@@ -10,9 +10,7 @@ We are a project team formed in the 2021 offering of COMP3820 Digital Health at
 The University of Queensland. Our team comprises skills in both UX and Development:
 
 - Finn Beardmore
-- Peiwen Li
 - Jameson Nguyen (@JNRuan)
-- Carl Shield
 - Yilin Su
 
 # Setup
