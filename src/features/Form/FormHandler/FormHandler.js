@@ -1,13 +1,19 @@
-import * as Yup from "yup";
-
-import { Form, Formik } from "formik";
-import { Panels, initialValues } from "../formConstants";
-import React, { useState } from "react";
-
 import Button from "@components/Button/Button";
+import {
+  Document,
+  Page,
+  PDFViewer,
+  StyleSheet,
+  Text,
+  View,
+} from "@react-pdf/renderer";
+import { Form, Formik } from "formik";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import * as Yup from "yup";
+import { initialValues, Panels } from "../formConstants";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
-
 const FormHandler = () => {
   // Control navigation of form, updates select and panel.
   const [activePanel, setActivePanel] = useState("panel-76453-0");
@@ -15,14 +21,82 @@ const FormHandler = () => {
 
   const onSubmit = (values) => {
     //  alert(JSON.stringify(values, null, 2));
+    onPrint(values);
   };
+  function onPrint(values) {
+    const styles = StyleSheet.create({
+      page: {
+        flexDirection: "row",
+        backgroundColor: "#E4E4E4",
+      },
+      section: {
+        margin: 10,
+        padding: 10,
+        flexGrow: 1,
+      },
+    });
 
+    // Create Document Component
+    const MyDocument = () => (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <View style={styles.section}>
+            <Text>
+              {Object.keys(values).map((panel) => {
+                // return <Text>{Panels[panel]}</Text>;
+              })}
+            </Text>
+          </View>
+          <View style={styles.section}>
+            <Text>
+              {Object.keys(values.panel).map((item) => {
+                //  return <Text>{item}</Text>;
+                //  return <Text>{values.panel[item]}</Text>;
+              })}
+            </Text>
+          </View>
+        </Page>
+      </Document>
+    );
+    const App = () => (
+      <PDFViewer>
+        <MyDocument />
+      </PDFViewer>
+    );
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  }
   const onSelect = (e) => {
     const activePanelId = `panel-${e.target.id}`;
     const activeSelectId = `select-${e.target.id}`;
     setActivePanel(activePanelId);
     setActiveSelect(activeSelectId);
   };
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: "row",
+      backgroundColor: "#E4E4E4",
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1,
+    },
+  });
+
+  // Create Document Component
+  const MyDocument = () => (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text>Section #1</Text>
+        </View>
+        <View style={styles.section}>
+          <Text>Section #2</Text>
+        </View>
+      </Page>
+    </Document>
+  );
 
   const isPanelActive = (id) => id === activePanel;
 
