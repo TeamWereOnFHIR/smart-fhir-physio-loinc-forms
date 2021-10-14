@@ -20,7 +20,7 @@ const FormHandler = () => {
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
 
   const onSubmit = (values) => {
-    //  alert(JSON.stringify(values, null, 2));
+    alert(JSON.stringify(values, null, 2));
     onPrint(values);
   };
   function onPrint(values) {
