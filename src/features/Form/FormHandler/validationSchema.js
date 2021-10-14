@@ -29,5 +29,14 @@ const validationSchema = Yup.object().shape({
   "77865-4": Yup.number().required(),
   "89950-0": Yup.number().required(),
   "89936-9": Yup.number().required(),
+  "92709-5": Yup.number().required(),
+  "92708-7": Yup.number().required(),
+  "92705-3": Yup.number().required(),
+  "92823-4": Yup.number().required(),
+  "92561-0": Yup.number().required(),
+  "42349-1": Yup.number().required(),
+  "76430-8": Yup.number().required(),
+  "89178-8": Yup.number().required(),
+  "76428-2": Yup.number().required(),
 });
 export default validationSchema;
