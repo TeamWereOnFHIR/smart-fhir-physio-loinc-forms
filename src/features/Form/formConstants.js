@@ -114,6 +114,12 @@ export const kneeInjuryPanels = {
   DailyLiving: dailyValues,
 };
 export const conditionPopulationPanels = {
+  "52742-4": "",
+  "71971-6": "",
+  "71969-0": "",
+  "77856-4": "",
+  "89950-0": "",
+  "89936-9": "",
   KneeInjuryPanel: kneeInjuryPanels,
   NeckDisabilityPanel: neckDisabilityValues,
   PatientReportedOutcomesPanel: patientReportOutcomesValues,
