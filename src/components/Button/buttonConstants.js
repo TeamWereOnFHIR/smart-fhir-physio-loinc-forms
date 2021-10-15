@@ -6,6 +6,7 @@ export const buttonTypes = {
 };
 
 export const buttonColours = {
-  primary: "gray",
-  secondary: "gray",
+  primary: "yellow",
+  secondary: "yellow",
 };
+
