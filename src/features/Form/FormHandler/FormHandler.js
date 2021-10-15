@@ -117,7 +117,7 @@ const FormHandler = () => {
           <Form className="bg-green-200">
             <div className="flex-1 flex-col items-center space-x-2">
               {/* START Row flex section for nav and form panels */}
-              <div className="flex items-start flex-row space-x-4 justify-center flex-grow bg-green-100">
+              <div className="flex items-start flex-row space-x-4 justify-center flex-grow bg-green-50">
                 <FormNav handleSelect={onSelect} activeSelect={activeSelect} />
                 {/* Render panels if selected in form nav. */}
                 {isPanelActive("panel-76453-0") ? (
