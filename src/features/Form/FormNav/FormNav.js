@@ -16,9 +16,9 @@ const FormNav = ({ handleSelect, activeSelect }) => {
 
   return (
     <>
-      <div className="bg-white w-3/12 rounded-2xl shadow-md pr-4 pb-6 sm:px-6 lg:px-8 sm:text-base">
+      <div className="bg-white w-5/12 rounded-2xl shadow-md pr-4 pb-6 sm:px-6 lg:px-8 sm:text-base">
         <div className="flex items-center justify-center pt-4">
-          <div className="lg:uppercase text-green-400 font-semibold sm:text-base">
+          <div className="lg:uppercase text-green-400 font-semibold sm:text-base lg: 3xl">
             Form Panels
           </div>
         </div>
