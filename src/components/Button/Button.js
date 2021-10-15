@@ -3,19 +3,22 @@ import { buttonColours, buttonTypes } from "./buttonConstants";
 /**
  * Primary and secondary styles for app buttons.
  */
-const primaryStyles = `bg-${buttonColours.primary}-800  active:bg-${buttonColours.primary}-600 border
+const primaryStyles = `bg-${buttonColours.primary}-500  active:bg-${buttonColours.primary}-300 border
                         hover:bg-${buttonColours.primary}-500 hover:shadow-lg
-                        text-${buttonColours.secondary}-200 font-bold uppercase text-sm 
+                        text-grey-900 font-bold uppercase text-sm 
                         px-6 py-3 mr-1 mb-1
                         rounded-md shadow focus:outline-none
-                        ease-linear transition-all duration-100`;
+                        ease-linear transition-all duration-100
+                        rounded-full`
+                        ;
 
 const secondaryStyles = `bg-${buttonColours.secondary}-400 active:bg-${buttonColours.secondary}-600 border
                           hover:bg-${buttonColours.secondary}-500 hover:shadow-lg
-                          text-${buttonColours.secondary}-900 font-bold uppercase text-sm 
+                          text-grey-700 font-bold uppercase text-sm 
                           px-6 py-3 mr-1 mb-1
                           rounded-md shadow focus:outline-none
-                          ease-linear transition-all duration-100`;
+                          ease-linear transition-all duration-100
+                          rounded-full`;
 
 /**
  * Generic app button. Can be set to primary or secondary.
@@ -47,3 +50,4 @@ Button.defaultProps = {
 };
 
 export default Button;
+

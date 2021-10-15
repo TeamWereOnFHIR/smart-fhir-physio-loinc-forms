@@ -1,7 +1,7 @@
 import { Panels } from "../formConstants";
 
 const formNavStyles = {
-  font: "text-sm font-bold uppercase",
+  font: "text-sm font-bold sm:text-base lg:uppercase",
   navFlex: "w-full flex items-center py-2 my-2 mx-4 justify-start",
   active:
     "text-green-500 transition-colors duration-200 bg-gradient-to-r from-white to-green-100 border-r-4 border-green-500",
@@ -16,14 +16,14 @@ const FormNav = ({ handleSelect, activeSelect }) => {
 
   return (
     <>
-      <div className="bg-white w-3/12 rounded-2xl shadow-md pr-4 pt-6 pb-6">
+      <div className="bg-white w-5/12 rounded-2xl shadow-md pr-4 pb-6 sm:px-6 lg:px-8 sm:text-base">
         <div className="flex items-center justify-center pt-4">
-          <h2 className="uppercase text-xl text-green-400 font-semibold">
+          <div className="lg:uppercase text-green-400 font-semibold sm:text-base lg: 3xl">
             Form Panels
-          </h2>
+          </div>
         </div>
         {/* Map Navigation in render */}
-        <nav className="mt-6">
+        <nav className="lg:mt-6">
           {Object.keys(formPanels).map((panel) => {
             return (
               <a
@@ -35,7 +35,8 @@ const FormNav = ({ handleSelect, activeSelect }) => {
                   isActive(formPanels[panel].selectId)
                     ? formNavStyles.active
                     : formNavStyles.inactive
-                }`}
+                }`
+                }
                 onClick={(e) => handleSelect(e)}
               >
                 {formPanels[panel].title}
