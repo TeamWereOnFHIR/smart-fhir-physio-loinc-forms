@@ -1,6 +1,6 @@
 import Button from "@components/Button/Button";
 import { Form, Formik } from "formik";
-import React, { useState } from "react";
+import { useState } from "react";
 import { initialValues, Panels } from "../formConstants";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
@@ -17,13 +17,11 @@ const FormHandler = () => {
   const [showPDF, setShowPDF] = useState(false);
 
   const onSubmitForm = (values) => {
-    alert(JSON.stringify(values, null, 2));
     console.log(JSON.stringify(values, null, 2));
   };
 
   function onPrint(values) {
-    // setPrintData(values)
-    alert(JSON.stringify(values, null, 2));
+    setPrintData(values);
     setShowPDF(true);
   }
 
@@ -40,14 +38,7 @@ const FormHandler = () => {
   return (
     <>
       {showPDF ? <FormPDF data={printData} /> : null}
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={async (values, { resetForm }) => {
-          await onSubmitForm(values);
-          resetForm();
-        }}
-      >
+      <Formik initialValues={initialValues} validationSchema={validationSchema}>
         {(formik) => (
           <Form className="bg-green-200">
             <div className="flex-1 flex-col items-center space-x-2">
@@ -87,13 +78,13 @@ const FormHandler = () => {
                 <div className="flex items-start flex-row space-x-4 justify-end flex-grow content-between bg-green-200 mr-9">
                   <Button
                     buttonType="secondary"
-                    handleClick={(formik) => onPrint(formik.values)}
+                    handleClick={() => onPrint(formik.values)}
                   >
                     Print
                   </Button>
                   <Button
                     buttonType="primary"
-                    handleClick={formik.handleSubmit}
+                    handleClick={() => onSubmitForm(formik.values)}
                   >
                     Submit
                   </Button>
