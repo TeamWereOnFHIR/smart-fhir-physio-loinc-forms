@@ -1,115 +1,50 @@
 import Button from "@components/Button/Button";
-import {
-  Document,
-  Page,
-  PDFViewer,
-  StyleSheet,
-  Text,
-  View,
-} from "@react-pdf/renderer";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import * as Yup from "yup";
 import { initialValues, Panels } from "../formConstants";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
+import FormPDF from "./FormPDF";
+import validationSchema from "./validationSchema";
+
 const FormHandler = () => {
   // Control navigation of form, updates select and panel.
   const [activePanel, setActivePanel] = useState("panel-76453-0");
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
 
-  const onSubmit = (values) => {
+  // Printing
+  const [printData, setPrintData] = useState({});
+  const [showPDF, setShowPDF] = useState(false);
+
+  const onSubmitForm = (values) => {
     alert(JSON.stringify(values, null, 2));
-    onPrint(values);
+    console.log(JSON.stringify(values, null, 2));
   };
+
   function onPrint(values) {
-    const styles = StyleSheet.create({
-      page: {
-        flexDirection: "row",
-        backgroundColor: "#E4E4E4",
-      },
-      section: {
-        margin: 10,
-        padding: 10,
-        flexGrow: 1,
-      },
-    });
-
-    // Create Document Component
-    const MyDocument = () => (
-      <Document>
-        <Page size="A4" style={styles.page}>
-          <View style={styles.section}>
-            <Text>
-              {Object.keys(values).map((panel) => {
-                // return <Text>{Panels[panel]}</Text>;
-              })}
-            </Text>
-          </View>
-          <View style={styles.section}>
-            <Text>
-              {Object.keys(values.panel).map((item) => {
-                //  return <Text>{item}</Text>;
-                //  return <Text>{values.panel[item]}</Text>;
-              })}
-            </Text>
-          </View>
-        </Page>
-      </Document>
-    );
-    const App = () => (
-      <PDFViewer>
-        <MyDocument />
-      </PDFViewer>
-    );
-
-    ReactDOM.render(<App />, document.getElementById("root"));
+    // setPrintData(values)
+    alert(JSON.stringify(values, null, 2));
+    setShowPDF(true);
   }
+
   const onSelect = (e) => {
     const activePanelId = `panel-${e.target.id}`;
     const activeSelectId = `select-${e.target.id}`;
     setActivePanel(activePanelId);
     setActiveSelect(activeSelectId);
   };
-  const styles = StyleSheet.create({
-    page: {
-      flexDirection: "row",
-      backgroundColor: "#E4E4E4",
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
-    },
-  });
-
-  // Create Document Component
-  const MyDocument = () => (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text>Section #1</Text>
-        </View>
-        <View style={styles.section}>
-          <Text>Section #2</Text>
-        </View>
-      </Page>
-    </Document>
-  );
 
   const isPanelActive = (id) => id === activePanel;
-
-  const validationSchema = Yup.object().shape({});
   const renderError = (message) => <p className="help is-danger">{message}</p>;
 
   return (
     <>
+      {showPDF ? <FormPDF data={printData} /> : null}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { resetForm }) => {
-          await onSubmit(values);
+          await onSubmitForm(values);
           resetForm();
         }}
       >
@@ -150,7 +85,12 @@ const FormHandler = () => {
               <div className="w-full py-2">
                 {/* TODO: do better with button panel, alignment etc. */}
                 <div className="flex items-start flex-row space-x-4 justify-end flex-grow content-between bg-green-200 mr-9">
-                  <Button buttonType="secondary">Print</Button>
+                  <Button
+                    buttonType="secondary"
+                    handleClick={(formik) => onPrint(formik.values)}
+                  >
+                    Print
+                  </Button>
                   <Button
                     buttonType="primary"
                     handleClick={formik.handleSubmit}

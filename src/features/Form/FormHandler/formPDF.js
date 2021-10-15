@@ -1,36 +1,33 @@
-import ReactPDF, {
-  Document,
-  Page,
-  StyleSheet,
-  Text,
-  View,
-} from "@react-pdf/renderer";
-import React from "react";
+const pdfStyles = {};
 
-// Create styles
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: "row",
-    backgroundColor: "#E4E4E4",
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-});
+const FormPDF = ({ data }) => {
+  return <p>asdkjlsfasdf</p>;
+};
 
-// Create Document Component
-const formPDF = () => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Text>Section #1</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Section #2</Text>
-      </View>
-    </Page>
-  </Document>
-);
-ReactPDF.render(<MyDocument />, `${__dirname}/example.pdf`);
+export default FormPDF;
+
+// // Create Document Component
+// const MyDocument = () => (
+//   <Document>
+//     <Page size="A4" style={styles.page}>
+//       <View style={styles.section}>
+//         <Text>
+//           {Object.keys(values).map((panel) => {
+//             // return <Text>{Panels[panel]}</Text>;
+//           })}
+//         </Text>
+//       </View>
+//       <View style={styles.section}>
+//         <Text>
+//           {Object.keys(values.panel).map((item) => {
+//             //  return <Text>{item}</Text>;
+//             //  return <Text>{values.panel[item]}</Text>;
+//             // Map keys values.map(panel => {
+//             // render heading renderHeading(panelText) Panel[panel].title
+//             // Map keys(panel).map(item => {
+//             // render field and value
+//           })}
+//         </Text>
+//       </View>
+//     </Page>
+//   </Document>
