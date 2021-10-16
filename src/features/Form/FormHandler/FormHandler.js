@@ -23,6 +23,7 @@ const FormHandler = () => {
   function onPrint(values) {
     setPrintData(values);
     setShowPDF(true);
+    console.log(printData);
   }
 
   const onSelect = (e) => {
