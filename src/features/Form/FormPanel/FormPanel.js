@@ -1,10 +1,8 @@
-import "react-datepicker/dist/react-datepicker.css";
-
-import { formPlaceholder, formTypes, subPanelKeys } from "../formConstants";
-
-import DatePickerField from "../DatePicker/DatePicker";
 import { Field } from "formik";
+import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
+import DatePickerField from "../DatePicker/DatePicker";
+import { formPlaceholder, formTypes, subPanelKeys } from "../formConstants";
 
 const panelStyles = {
   panel: "bg-white w-7/12 shadow-md rounded px-8 pt-6 pb-8 mb-4",

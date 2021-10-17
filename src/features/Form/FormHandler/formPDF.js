@@ -24,26 +24,37 @@ const FormPDF = ({ data }) => {
     initialValues.BillingInfoPanel,
   ];
   console.log(panelValues);
-
+  /**
+   *  Render the Titles of Each Panel for the form PDF
+   * @param {*} key
+   * @param {*} data
+   * @returns A HTML component of the heading of each panel
+   */
   const renderPanelTitles = (key, data) => {
     console.log(data);
     return (
       <>
-        <h1 key={key}>{String(data)}</h1>
+        <h1 key={key}>{data}</h1>
       </>
     );
   };
-  const printOutValues = (value) => {
-    return <h2>{value}</h2>;
+  const printOutValues = (key, value) => {
+    return (
+      <div>
+        <h2>{key}</h2>
+        <h4>{value}</h4>
+      </div>
+    );
   };
   const renderPanelValues = (key, data) => {
     console.log(data);
     var inputs = [];
     for (let [key, value] of Object.entries(data)) {
-      if (typeof value === "string" || value instanceof String)
-        inputs.push(value);
+      if ((typeof value === "string" || value instanceof String) && value != "")
+        inputs.push(key, value);
     }
-    return inputs.map((value) => printOutValues(value));
+    console.log(inputs + "INPUUUTTSS");
+    return inputs.map((key, value) => printOutValues(key, value));
   };
   //
   return (
