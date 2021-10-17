@@ -67,7 +67,7 @@ const FormHandler = () => {
                 {/* END Form Panel and Form Nav */}
               </div>
               {/* Button Panel */}
-              <div className="w-full py-2">
+              {/* <div className="fixed w-full max-w-7xl"> */}
                 {/* TODO: do better with button panel, alignment etc. */}
                 <div className="flex items-start flex-row space-x-4 justify-end flex-grow content-between bg-green-200 mr-9">
                   <Button
@@ -83,7 +83,7 @@ const FormHandler = () => {
                     Submit
                   </Button>
                 </div>
-              </div>
+              {/* </div> */}
               {/* END MAIN FLEX */}
             </div>
           </Form>
