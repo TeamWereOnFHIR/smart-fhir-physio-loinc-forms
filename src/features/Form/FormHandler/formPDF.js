@@ -38,11 +38,12 @@ const FormPDF = ({ data }) => {
       </>
     );
   };
-  const printOutValues = (key, value) => {
+  const printOutValues = (key) => {
     return (
       <div>
-        <h2>{key}</h2>
-        <h4>{value}</h4>
+        <h2>
+          <strong>{key}</strong>
+        </h2>
       </div>
     );
   };
