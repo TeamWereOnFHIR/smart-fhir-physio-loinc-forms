@@ -7,7 +7,7 @@ import { Field } from "formik";
 import { useSelector } from "react-redux";
 
 const panelStyles = {
-  panel: "bg-white w-7/12 shadow-md rounded px-8 pt-6 pb-8 mb-4",
+  panel: "bg-white w-7/12 shadow-md rounded px-8 pt-6 pb-8 mb-4 overflow-y-scroll h-1/3 max-h-screen",
   fieldDiv: "col-span-6 sm:col-span-3",
   label: "block text-gray-700 font-bold text-sm mt-2 mb-2",
   panelH2: "block text-gray-700 font-bold mb-2 text-2xl mt-4",
