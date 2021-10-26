@@ -1,7 +1,19 @@
+import { useSelector } from "react-redux";
 import { initialValues, Panels } from "../formConstants";
 const pdfStyles = {};
 
 const FormPDF = ({ data }) => {
+  const loincForm = useSelector((state) => state.loincForm);
+  // get title and panelID -- Form Metta data
+  const formMetaData = loincForm.formData;
+  const formPanels = loincForm.formPanels; //array of form pannel objects
+  //filter a specific pannel
+  // const initalPanel = formPanels.filter((panel) =>
+  //  panel.linkId.includes(InitalPanelId)
+  //);
+  //
+  //const intialPanelFeilds = initalPanel.item;
+  //initialPanel.filter((feild) => feild.linkID.inludes(idfromvalueobject));
   const panelKeys = Object.keys(data);
   const panelValues = Object.values(data);
   const panels = [
@@ -54,7 +66,6 @@ const FormPDF = ({ data }) => {
       if ((typeof value === "string" || value instanceof String) && value != "")
         inputs.push(key, value);
     }
-    console.log(inputs + "INPUUUTTSS");
     return inputs.map((key, value) => printOutValues(key, value));
   };
   //
