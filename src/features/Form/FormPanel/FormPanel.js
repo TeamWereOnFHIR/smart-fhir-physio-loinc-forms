@@ -1,13 +1,12 @@
+import { Field } from "formik";
 import "react-datepicker/dist/react-datepicker.css";
-
+import { useSelector } from "react-redux";
+import DatePickerField from "../DatePicker/DatePicker";
 import { formPlaceholder, formTypes, subPanelKeys } from "../formConstants";
 
-import DatePickerField from "../DatePicker/DatePicker";
-import { Field } from "formik";
-import { useSelector } from "react-redux";
-
 const panelStyles = {
-  panel: "bg-white w-7/12 shadow-md rounded px-8 pt-6 pb-8 mb-4 overflow-y-scroll h-96",
+  panel:
+    "bg-white w-7/12 shadow-md rounded px-8 pt-6 pb-8 mb-4 overflow-y-scroll h-96",
   fieldDiv: "col-span-6 sm:col-span-3",
   label: "block text-gray-700 font-bold text-sm mt-2 mb-2",
   panelH2: "block text-gray-700 font-bold mb-2 text-2xl mt-4",
@@ -139,7 +138,7 @@ const FormPanel = ({ panel }) => {
               <option
                 className={panelStyles.options}
                 key={option.valueCoding.code}
-                value={`${option.valueCoding.code}`}
+                value={`${option.valueCoding.code}_${option.valueCoding.display}`}
               >{`${option.valueCoding.code} - ${option.valueCoding.display}`}</option>
             ))}
           </Field>
