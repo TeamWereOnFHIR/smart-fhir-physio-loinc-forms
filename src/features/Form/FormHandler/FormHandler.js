@@ -35,22 +35,7 @@ const FormHandler = () => {
       <Formik initialValues={initialValues} validationSchema={validationSchema}>
         {(formik) => (
           <Form className="bg-white">
-            <div className="flex-1 flex-col items-center space-x-2">
-              
-              <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
-                  <Button
-                    buttonType="secondary"
-                    handleClick={() => onPrint(formik.values)}
-                  >
-                    Print
-                  </Button>
-                  <Button
-                    buttonType="primary"
-                    handleClick={() => onSubmitForm(formik.values)}
-                  >
-                    Submit
-                  </Button>
-                </div>
+            <div className="flex-1 flex-col items-center space-x-2 max-h-48">
 
               {/* START Row flex section for nav and form panels */}
               <div className="flex items-start flex-row pt-10 space-x-4 justify-center flex-grow bg-green-50">
@@ -85,7 +70,20 @@ const FormHandler = () => {
               {/* Button Panel */}
               {/* <div className="fixed w-full max-w-7xl"> */}
                 {/* TODO: do better with button panel, alignment etc. */}
-               
+                <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
+                  <Button
+                    buttonType="secondary"
+                    handleClick={() => onPrint(formik.values)}
+                  >
+                    Print
+                  </Button>
+                  <Button
+                    buttonType="primary"
+                    handleClick={() => onSubmitForm(formik.values)}
+                  >
+                    Submit
+                  </Button>
+                </div>
               {/* </div> */}
               {/* END MAIN FLEX */}
             </div>
