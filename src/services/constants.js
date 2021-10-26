@@ -19,7 +19,7 @@ export const FhirResources = {
    *  sandbox: server - R4 Smarthealthit sandbox
    *  Q: resourceType - Questionnaire
    */
-  sandboxQLoincPhysioFormId: "1356478",
+  sandboxQLoincPhysioFormId: "1357919",
 };
 
 export const FhirApiUrl = {
