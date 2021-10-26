@@ -1,12 +1,14 @@
 import Button from "@components/Button/Button";
 import { Form, Formik } from "formik";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { initialValues, Panels } from "../formConstants";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
 import validationSchema from "./validationSchema";
 
 const FormHandler = () => {
+  const history = useHistory();
   // Control navigation of form, updates select and panel.
   const [activePanel, setActivePanel] = useState("panel-76453-0");
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
@@ -18,6 +20,7 @@ const FormHandler = () => {
 
   const onPrint = (values) => {
     console.log(values);
+    history.push("/form/print", { formValues: values });
   };
 
   const onSelect = (e) => {
@@ -36,7 +39,6 @@ const FormHandler = () => {
         {(formik) => (
           <Form className="bg-white">
             <div className="flex-1 flex-col items-center space-x-2 max-h-48">
-
               {/* START Row flex section for nav and form panels */}
               <div className="flex items-start flex-row pt-10 space-x-4 justify-center flex-grow bg-green-50">
                 <FormNav handleSelect={onSelect} activeSelect={activeSelect} />
@@ -69,21 +71,21 @@ const FormHandler = () => {
               </div>
               {/* Button Panel */}
               {/* <div className="fixed w-full max-w-7xl"> */}
-                {/* TODO: do better with button panel, alignment etc. */}
-                <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
-                  <Button
-                    buttonType="secondary"
-                    handleClick={() => onPrint(formik.values)}
-                  >
-                    Print
-                  </Button>
-                  <Button
-                    buttonType="primary"
-                    handleClick={() => onSubmitForm(formik.values)}
-                  >
-                    Submit
-                  </Button>
-                </div>
+              {/* TODO: do better with button panel, alignment etc. */}
+              <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
+                <Button
+                  buttonType="secondary"
+                  handleClick={() => onPrint(formik.values)}
+                >
+                  Print
+                </Button>
+                <Button
+                  buttonType="primary"
+                  handleClick={() => onSubmitForm(formik.values)}
+                >
+                  Submit
+                </Button>
+              </div>
               {/* </div> */}
               {/* END MAIN FLEX */}
             </div>
