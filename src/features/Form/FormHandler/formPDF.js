@@ -14,6 +14,9 @@ const FormPDF = ({ data }) => {
   //
   //const intialPanelFeilds = initalPanel.item;
   //initialPanel.filter((feild) => feild.linkID.inludes(idfromvalueobject));
+  // get text
+  // print panel title
+  // print values of form
   const panelKeys = Object.keys(data);
   const panelValues = Object.values(data);
   const panels = [
@@ -62,6 +65,7 @@ const FormPDF = ({ data }) => {
   const renderPanelValues = (key, data) => {
     console.log(data);
     var inputs = [];
+    //filter as type group for the massive panel!
     for (let [key, value] of Object.entries(data)) {
       if ((typeof value === "string" || value instanceof String) && value != "")
         inputs.push(key, value);
