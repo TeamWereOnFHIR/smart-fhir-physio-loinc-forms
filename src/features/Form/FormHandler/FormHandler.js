@@ -1,31 +1,122 @@
 import Button from "@components/Button/Button";
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { initialValues, Panels } from "../formConstants";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
-import FormPDF from "./FormPDF";
 import validationSchema from "./validationSchema";
 
+/**
+ * FormHandler is the main form container and controls form logic and decides what to render.
+ */
 const FormHandler = () => {
-  // Control navigation of form, updates select and panel.
+  // Router history navigator
+  const history = useHistory();
+  // Form navigation state
   const [activePanel, setActivePanel] = useState("panel-76453-0");
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
+  // Redux - Patient State
+  const patient = useSelector((state) => state.patient);
+  // Redux - User State
+  const user = useSelector((state) => state.user);
+  // Redux - Form Data
+  const loincForm = useSelector((state) => state.loincForm);
+  // Form values state
+  const [formikValues, setFormikValues] = useState(initialValues);
+  /**
+   * Effect called on first form render.
+   */
+  useEffect(() => {
+    // Prepopulate patient details
+    prefillPatient();
+    prefillProvider();
+  }, []);
 
-  // Printing
-  const [printData, setPrintData] = useState({});
-  const [showPDF, setShowPDF] = useState(false);
+  const prefillPatient = () => {
+    const initialPanel = loincForm.formPanels[0];
+    const patientData = patient.patientData;
+    const newFormikValues = formikValues;
+    // Initial Panel Prefill
+    // Patient Identifier
+    const medicalRecordNum = patientData.identifier.filter((ident) =>
+      ident.system.includes("hospital")
+    )[0];
+    newFormikValues.InitialPanel["76435-7"] = medicalRecordNum?.value || "";
 
+    // Patient Identifier assigning authority
+    if (medicalRecordNum) {
+      const authorityOptions = initialPanel.item.filter((item) =>
+        item.linkId.includes("76698-0")
+      )[0]?.answerOption;
+      if (authorityOptions) {
+        const authorityCode = authorityOptions[0].valueCoding.code;
+        const authorityText = authorityOptions[0].valueCoding.display;
+        newFormikValues.InitialPanel[
+          "76698-0"
+        ] = `${authorityCode}_${authorityText}`;
+      }
+    }
+
+    setFormikValues(newFormikValues);
+  };
+
+  const prefillProvider = () => {
+    const initialPanel = loincForm.formPanels[0];
+    const providerData = user.userData;
+    const newFormikValues = formikValues;
+    // Initial Panel Prefill
+    // Provider Names
+    const providerName = providerData.name[0];
+    newFormikValues.InitialPanel["76417-5"] = providerName.given[0];
+    newFormikValues.InitialPanel["76419-1"] = providerName.family;
+
+    // Provider NPI - id
+    const providerId = providerData.identifier.filter((ident) =>
+      ident.system.includes("npi")
+    )[0];
+    newFormikValues.InitialPanel["45952-9"] = providerId?.value || "";
+
+    // Provider Role
+    const roleOptions = initialPanel.item.filter((item) =>
+      item.linkId.includes("86637-6")
+    )[0]?.answerOption;
+    if (roleOptions) {
+      const providerCode = roleOptions[5].valueCoding.code;
+      const providerText = roleOptions[5].valueCoding.display;
+      newFormikValues.InitialPanel[
+        "86637-6"
+      ] = `${providerCode}_${providerText}`;
+    }
+
+    setFormikValues(newFormikValues);
+  };
+
+  /**
+   * Calls when submit button is clicked.
+   *
+   * @param values - formik values object containing current form values.
+   */
   const onSubmitForm = (values) => {
     console.log(JSON.stringify(values, null, 2));
   };
 
-  function onPrint(values) {
-    setPrintData(values);
-    setShowPDF(true);
-    console.log(printData);
-  }
+  /**
+   * Calls when print button is clicked.
+   *
+   * @param values - formik values object containing current form values.
+   */
+  const onPrint = (values) => {
+    console.log(values);
+    history.push("/form/print", { formValues: values });
+  };
 
+  /**
+   * Updates active panel on select in navigation.
+   *
+   * @param e - select event.
+   */
   const onSelect = (e) => {
     const activePanelId = `panel-${e.target.id}`;
     const activeSelectId = `select-${e.target.id}`;
@@ -33,18 +124,26 @@ const FormHandler = () => {
     setActiveSelect(activeSelectId);
   };
 
+  /**
+   * Helper function checks if a panel is currently active.
+   *
+   * @param id - string id of panel
+   * @returns True if panel is set to active, false otherwise.
+   */
   const isPanelActive = (id) => id === activePanel;
-  const renderError = (message) => <p className="help is-danger">{message}</p>;
 
   return (
     <>
-      {showPDF ? <FormPDF data={printData} /> : null}
-      <Formik initialValues={initialValues} validationSchema={validationSchema}>
+      <Formik
+        initialValues={formikValues}
+        validationSchema={validationSchema}
+        enableReinitialize={true}
+      >
         {(formik) => (
-          <Form className="bg-green-200">
-            <div className="flex-1 flex-col items-center space-x-2">
+          <Form className="bg-white">
+            <div className="flex-1 flex-col items-center space-x-2 max-h-48">
               {/* START Row flex section for nav and form panels */}
-              <div className="flex items-start flex-row space-x-4 justify-center flex-grow bg-green-50">
+              <div className="flex items-start flex-row pt-10 space-x-4 justify-center flex-grow bg-green-50">
                 <FormNav handleSelect={onSelect} activeSelect={activeSelect} />
                 {/* Render panels if selected in form nav. */}
                 {isPanelActive("panel-76453-0") ? (
@@ -74,23 +173,23 @@ const FormHandler = () => {
                 {/* END Form Panel and Form Nav */}
               </div>
               {/* Button Panel */}
-              <div className="w-full py-2">
-                {/* TODO: do better with button panel, alignment etc. */}
-                <div className="flex items-start flex-row space-x-4 justify-end flex-grow content-between bg-green-200 mr-9">
-                  <Button
-                    buttonType="secondary"
-                    handleClick={() => onPrint(formik.values)}
-                  >
-                    Print
-                  </Button>
-                  <Button
-                    buttonType="primary"
-                    handleClick={() => onSubmitForm(formik.values)}
-                  >
-                    Submit
-                  </Button>
-                </div>
+              {/* <div className="fixed w-full max-w-7xl"> */}
+              {/* TODO: do better with button panel, alignment etc. */}
+              <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
+                <Button
+                  buttonType="secondary"
+                  handleClick={() => onPrint(formik.values)}
+                >
+                  Print
+                </Button>
+                <Button
+                  buttonType="primary"
+                  handleClick={() => onSubmitForm(formik.values)}
+                >
+                  Submit
+                </Button>
               </div>
+              {/* </div> */}
               {/* END MAIN FLEX */}
             </div>
           </Form>

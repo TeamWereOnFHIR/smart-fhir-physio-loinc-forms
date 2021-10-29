@@ -1,8 +1,7 @@
-import "./App.css";
-
-import { BrowserRouter, Route } from "react-router-dom";
-
+import FormPDF from "@features/Form/FormPDF/FormPDF";
 import NavBanner from "@features/Nav/NavBanner";
+import { BrowserRouter, Route } from "react-router-dom";
+import "./App.css";
 import PrivateRoute from "./router/PrivateRoute";
 import routes from "./router/routes";
 
@@ -22,7 +21,14 @@ function App() {
   return (
     <div>
       <NavBanner />
-      <BrowserRouter>{appRoutes}</BrowserRouter>
+      <BrowserRouter>
+        {appRoutes}
+        <Route
+          exact
+          path={"/form/print"}
+          render={(props) => <FormPDF {...props} />}
+        />
+      </BrowserRouter>
     </div>
   );
 }
