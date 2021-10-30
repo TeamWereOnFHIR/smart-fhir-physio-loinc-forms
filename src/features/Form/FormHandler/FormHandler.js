@@ -28,6 +28,8 @@ const FormHandler = ({ fhirAPI }) => {
   const [formikValues, setFormikValues] = useState(initialValues);
   // FHIR API Service
   const fhirAPIService = fhirAPI;
+  // Current Form ID, this is an empty string if a new form. Currently doesn't do much but will be critical for form loading later.
+  const [formId, setFormId] = useState("");
 
   /**
    * Effect called on first form render.
@@ -104,16 +106,28 @@ const FormHandler = ({ fhirAPI }) => {
    *
    * @param values - formik values object containing current form values.
    */
-  const onSubmitForm = (values) => {
+  const onSubmitForm = async (values) => {
     const formPanels = loincForm.formPanels;
     const providerId = user.userData.id;
     const patientId = patient.patientData.id;
-    fhirAPIService.saveQuestionnaireResponse(
-      values,
-      formPanels,
-      patientId,
-      providerId
-    );
+    const currentFormId = formId;
+    await fhirAPIService
+      .saveQuestionnaireResponse(
+        values,
+        formPanels,
+        currentFormId,
+        patientId,
+        providerId
+      )
+      .then((res) => {
+        console.log("Form submitted.");
+        console.log(res);
+        setFormId(res.id);
+      })
+      .catch((error) => {
+        console.log("Error submitting form.");
+        console.error(error);
+      });
   };
 
   /**

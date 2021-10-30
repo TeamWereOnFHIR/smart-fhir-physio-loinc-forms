@@ -137,17 +137,27 @@ class FhirAPIService {
   saveQuestionnaireResponse = async (
     formValues,
     formPanels,
+    formId,
     patientId,
     providerId
   ) => {
-    const qResponseResource = fhirQuestionnaireResponse;
-    qResponseResource.author.reference = `Practitioner/${providerId}`;
-    qResponseResource.subject.reference = `Patient/${patientId}`;
-    qResponseResource.authored = new Date();
-    console.log(qResponseResource);
-    console.log(formValues);
-    console.log(formPanels);
-    this.fhirClient.create(qResponseResource);
+    let res = undefined;
+    // Setup questionnaire response information
+    const resource = fhirQuestionnaireResponse;
+    resource.author.reference = `Practitioner/${providerId}`;
+    resource.subject.reference = `Patient/${patientId}`;
+    resource.authored = new Date();
+
+    // Update form response items
+
+    // Update if formId existing.
+    if (formId) {
+      resource.id = formId;
+      res = await this.fhirClient.update(resource);
+    } else {
+      res = await this.fhirClient.create(resource);
+    }
+    return res;
   };
 }
 
