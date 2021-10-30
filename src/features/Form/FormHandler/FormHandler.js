@@ -189,7 +189,7 @@ const FormHandler = ({ fhirAPI }) => {
               {/* Button Panel */}
               {/* <div className="fixed w-full max-w-7xl"> */}
               {/* TODO: do better with button panel, alignment etc. */}
-              <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
+              <div className="flex flex row items-start flex-row w-full max-w-6xl -my-18 justify-end space-x-1 flex-grow content-between">
                 <Button
                   buttonType="secondary"
                   handleClick={() => onPrint(formik.values)}
