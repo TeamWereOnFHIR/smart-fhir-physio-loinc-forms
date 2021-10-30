@@ -33,7 +33,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="bg-gradient-to-b from-green-400 to-white">
       {patient.loading || user.loading || loincForm.loading ? (
         <LoadingIndicator text="Loading..." />
       ) : (
@@ -64,12 +64,9 @@ const HomeScreen = () => {
           )}
 
           <main>
-            <div className="max-w-7xl mx-auto pt-6 sm:px-6 lg:px-8">
-              <div className="w-full">
+            <div className="max-w-6xl mx-auto py-6 sm:px-6 lg:px-8 items-center py-10 justify-center flex-grow">
                 {/* Components */}
-
                 <FormHandler />
-              </div>
             </div>
 
             {/* /End replace */}
