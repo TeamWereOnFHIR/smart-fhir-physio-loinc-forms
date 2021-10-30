@@ -142,13 +142,8 @@ const FormHandler = () => {
         enableReinitialize={true}
       >
         {(formik) => (
-<<<<<<< HEAD
-          <Form>
-            {/* <div className="items-center space-x-2 max-h-screen"> */}
-=======
           <Form className="bg-white">
             <div className="flex-1 flex-col items-center space-x-2 max-h-48">
->>>>>>> f675f8897afb64cab8c86e592a2819156a3f041f
               {/* START Row flex section for nav and form panels */}
               <div className="flex flex-row">
                 <FormNav handleSelect={onSelect} activeSelect={activeSelect} />
@@ -181,23 +176,6 @@ const FormHandler = () => {
               </div>
               {/* Button Panel */}
               {/* <div className="fixed w-full max-w-7xl"> */}
-<<<<<<< HEAD
-                {/* TODO: do better with button panel, alignment etc. */}
-                <div className="flex flex row items-start flex-row w-full max-w-6xl -my-18 justify-end space-x-1 flex-grow content-between">
-                  <Button
-                    buttonType="secondary"
-                    handleClick={() => onPrint(formik.values)}
-                  >
-                    Print
-                  </Button>
-                  <Button
-                    buttonType="primary"
-                    handleClick={() => onSubmitForm(formik.values)}
-                  >
-                    Submit
-                  </Button>
-                </div>
-=======
               {/* TODO: do better with button panel, alignment etc. */}
               <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
                 <Button
@@ -213,14 +191,14 @@ const FormHandler = () => {
                   Submit
                 </Button>
               </div>
->>>>>>> f675f8897afb64cab8c86e592a2819156a3f041f
               {/* </div> */}
               {/* END MAIN FLEX */}
-            {/* </div> */}
+            </div>
           </Form>
         )}
       </Formik>
     </>
   );
 };
+
 export default FormHandler;
