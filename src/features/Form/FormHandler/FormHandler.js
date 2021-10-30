@@ -12,7 +12,7 @@ import validationSchema from "./validationSchema";
 /**
  * FormHandler is the main form container and controls form logic and decides what to render.
  */
-const FormHandler = () => {
+const FormHandler = ({ fhirAPI }) => {
   // Router history navigator
   const history = useHistory();
   // Form navigation state
@@ -26,6 +26,9 @@ const FormHandler = () => {
   const loincForm = useSelector((state) => state.loincForm);
   // Form values state
   const [formikValues, setFormikValues] = useState(initialValues);
+  // FHIR API Service
+  const fhirAPIService = fhirAPI;
+
   /**
    * Effect called on first form render.
    */
@@ -97,11 +100,20 @@ const FormHandler = () => {
   /**
    * Calls when submit button is clicked.
    *
+   * Passes current form values and loinc form panels to fhirAPIService.
+   *
    * @param values - formik values object containing current form values.
    */
   const onSubmitForm = (values) => {
-    //  alert(JSON.stringify(values, null, 2));
-    console.log(values);
+    const formPanels = loincForm.formPanels;
+    const providerId = user.userData.id;
+    const patientId = patient.patientData.id;
+    fhirAPIService.saveQuestionnaireResponse(
+      values,
+      formPanels,
+      patientId,
+      providerId
+    );
   };
 
   /**

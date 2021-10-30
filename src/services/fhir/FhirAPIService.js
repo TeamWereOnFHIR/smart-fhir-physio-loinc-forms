@@ -13,6 +13,7 @@ import {
 import { setUser, setUserError, setUserLoading } from "@redux/slices/userSlice";
 
 import { FhirApiUrl } from "@services/constants";
+import { fhirQuestionnaireResponse } from "@services/fhir/models/fhirQuestionnaireResponse";
 import { initErrorState } from "@common/globalConstants";
 import store from "@redux/store";
 
@@ -125,6 +126,28 @@ class FhirAPIService {
         store.dispatch(setLoincFormDataError(error));
         store.dispatch(setLoincFormLoading(false));
       });
+  };
+
+  /**
+   * Submit current form values as QuestionnaireResponse.
+   *
+   * @param formValues - Form Values response object from Formik.
+   * @param formPAnels - Array of form panels from redux store.
+   */
+  saveQuestionnaireResponse = async (
+    formValues,
+    formPanels,
+    patientId,
+    providerId
+  ) => {
+    const qResponseResource = fhirQuestionnaireResponse;
+    qResponseResource.author.reference = `Practitioner/${providerId}`;
+    qResponseResource.subject.reference = `Patient/${patientId}`;
+    qResponseResource.authored = new Date();
+    console.log(qResponseResource);
+    console.log(formValues);
+    console.log(formPanels);
+    this.fhirClient.create(qResponseResource);
   };
 }
 
