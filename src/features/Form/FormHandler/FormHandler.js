@@ -34,11 +34,10 @@ const FormHandler = () => {
     <>
       <Formik initialValues={initialValues} validationSchema={validationSchema}>
         {(formik) => (
-          <Form className="bg-white">
-            <div className="flex-1 flex-col items-center space-x-2 max-h-48">
-
+          <Form>
+            {/* <div className="items-center space-x-2 max-h-screen"> */}
               {/* START Row flex section for nav and form panels */}
-              <div className="flex items-start flex-row pt-10 space-x-4 justify-center flex-grow bg-green-50">
+              <div className="flex flex-row">
                 <FormNav handleSelect={onSelect} activeSelect={activeSelect} />
                 {/* Render panels if selected in form nav. */}
                 {isPanelActive("panel-76453-0") ? (
@@ -70,7 +69,7 @@ const FormHandler = () => {
               {/* Button Panel */}
               {/* <div className="fixed w-full max-w-7xl"> */}
                 {/* TODO: do better with button panel, alignment etc. */}
-                <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
+                <div className="flex flex row items-start flex-row w-full max-w-6xl -my-18 justify-end space-x-1 flex-grow content-between">
                   <Button
                     buttonType="secondary"
                     handleClick={() => onPrint(formik.values)}
@@ -86,7 +85,7 @@ const FormHandler = () => {
                 </div>
               {/* </div> */}
               {/* END MAIN FLEX */}
-            </div>
+            {/* </div> */}
           </Form>
         )}
       </Formik>
