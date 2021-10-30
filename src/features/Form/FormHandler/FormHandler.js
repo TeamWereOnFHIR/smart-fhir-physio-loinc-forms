@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Button from "@components/Button/Button";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
+import Modal from "@components/Modal/Modal";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import validationSchema from "./validationSchema";
@@ -18,6 +19,8 @@ const FormHandler = ({ fhirAPI }) => {
   // Form navigation state
   const [activePanel, setActivePanel] = useState("panel-76453-0");
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
+  // Submit Modal state
+  const [showSubmitModal, setSubmitModal] = useState(false);
   // Redux - Patient State
   const patient = useSelector((state) => state.patient);
   // Redux - User State
@@ -123,6 +126,7 @@ const FormHandler = ({ fhirAPI }) => {
         console.log("Form submitted.");
         console.log(res);
         setFormId(res.id);
+        setSubmitModal(true);
       })
       .catch((error) => {
         console.log("Error submitting form.");
@@ -162,6 +166,12 @@ const FormHandler = ({ fhirAPI }) => {
 
   return (
     <>
+      {showSubmitModal ? (
+        <Modal setModal={setSubmitModal} headerText="Success">
+          {`Form ${formId} submitted successfully!`}
+        </Modal>
+      ) : null}
+      {/* FORM STARTS HERE */}
       <Formik
         initialValues={formikValues}
         validationSchema={validationSchema}
