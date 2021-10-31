@@ -1,4 +1,5 @@
 import Button from "@components/Button/Button";
+import Modal from "@components/Modal/Modal";
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -11,12 +12,14 @@ import validationSchema from "./validationSchema";
 /**
  * FormHandler is the main form container and controls form logic and decides what to render.
  */
-const FormHandler = () => {
+const FormHandler = ({ fhirAPI }) => {
   // Router history navigator
   const history = useHistory();
   // Form navigation state
   const [activePanel, setActivePanel] = useState("panel-76453-0");
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
+  // Submit Modal state
+  const [showSubmitModal, setSubmitModal] = useState(false);
   // Redux - Patient State
   const patient = useSelector((state) => state.patient);
   // Redux - User State
@@ -25,6 +28,11 @@ const FormHandler = () => {
   const loincForm = useSelector((state) => state.loincForm);
   // Form values state
   const [formikValues, setFormikValues] = useState(initialValues);
+  // FHIR API Service
+  const fhirAPIService = fhirAPI;
+  // Current Form ID, this is an empty string if a new form. Currently doesn't do much but will be critical for form loading later.
+  const [formId, setFormId] = useState("");
+
   /**
    * Effect called on first form render.
    */
@@ -96,10 +104,33 @@ const FormHandler = () => {
   /**
    * Calls when submit button is clicked.
    *
+   * Passes current form values and loinc form panels to fhirAPIService.
+   *
    * @param values - formik values object containing current form values.
    */
-  const onSubmitForm = (values) => {
-    console.log(JSON.stringify(values, null, 2));
+  const onSubmitForm = async (values) => {
+    const formPanels = loincForm.formPanels;
+    const providerId = user.userData.id;
+    const patientId = patient.patientData.id;
+    const currentFormId = formId;
+    await fhirAPIService
+      .saveQuestionnaireResponse(
+        values,
+        formPanels,
+        currentFormId,
+        patientId,
+        providerId
+      )
+      .then((res) => {
+        console.log("Form submitted.");
+        console.log(res);
+        setFormId(res.id);
+        setSubmitModal(true);
+      })
+      .catch((error) => {
+        console.log("Error submitting form.");
+        console.error(error);
+      });
   };
 
   /**
@@ -134,6 +165,12 @@ const FormHandler = () => {
 
   return (
     <>
+      {showSubmitModal ? (
+        <Modal setModal={setSubmitModal} headerText="Success">
+          {`Form ${formId} submitted successfully!`}
+        </Modal>
+      ) : null}
+      {/* FORM STARTS HERE */}
       <Formik
         initialValues={formikValues}
         validationSchema={validationSchema}
@@ -143,7 +180,7 @@ const FormHandler = () => {
           <Form className="bg-white">
             <div className="flex-1 flex-col items-center space-x-2 max-h-48">
               {/* START Row flex section for nav and form panels */}
-              <div className="flex items-start flex-row pt-10 space-x-4 justify-center flex-grow bg-green-50">
+              <div className="flex flex-row">
                 <FormNav handleSelect={onSelect} activeSelect={activeSelect} />
                 {/* Render panels if selected in form nav. */}
                 {isPanelActive("panel-76453-0") ? (
@@ -175,7 +212,7 @@ const FormHandler = () => {
               {/* Button Panel */}
               {/* <div className="fixed w-full max-w-7xl"> */}
               {/* TODO: do better with button panel, alignment etc. */}
-              <div className="fixed flex items-start flex-row w-full max-w-6xl space-x-4 justify-end flex-grow content-between">
+              <div className="flex flex row items-start flex-row w-full max-w-6xl -my-18 justify-end space-x-1 flex-grow content-between">
                 <Button
                   buttonType="secondary"
                   handleClick={() => onPrint(formik.values)}
@@ -198,4 +235,5 @@ const FormHandler = () => {
     </>
   );
 };
+
 export default FormHandler;

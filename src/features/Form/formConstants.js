@@ -257,7 +257,7 @@ export const initialValues = {
   PatientGoalsPanel: ptGoalsValues,
   PlannedInterventionPanel: plannedInterventionValues,
   InterventionServicesPanel: interventionServicesValues,
-  BillingInfoPanel: billingInfoValues,
+  BillingPanel: billingInfoValues,
   ConditionPopulationPanel: conditionPopulationPanels,
 };
 
@@ -274,6 +274,8 @@ export const formTypes = {
     number: "decimal",
     select: "choice",
     group: "group",
+    date: "date",
+    dateTime: "dateTime",
   },
   form: {
     string: "string",
