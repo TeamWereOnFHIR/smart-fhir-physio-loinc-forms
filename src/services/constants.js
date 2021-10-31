@@ -25,7 +25,7 @@ export const FhirResources = {
    *  sandbox: server - R4 Smarthealthit sandbox
    *  Q: resourceType - Questionnaire
    */
-  sandboxQLoincPhysioFormId: "1359538",
+  sandboxQLoincPhysioFormId: "1359566",
 };
 
 // FHIR API URLs
