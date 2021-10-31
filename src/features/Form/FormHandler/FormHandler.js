@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Button from "@components/Button/Button";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
+import Modal from "@components/Modal/Modal";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import validationSchema from "./validationSchema";
@@ -12,12 +13,14 @@ import validationSchema from "./validationSchema";
 /**
  * FormHandler is the main form container and controls form logic and decides what to render.
  */
-const FormHandler = () => {
+const FormHandler = ({ fhirAPI }) => {
   // Router history navigator
   const history = useHistory();
   // Form navigation state
   const [activePanel, setActivePanel] = useState("panel-76453-0");
   const [activeSelect, setActiveSelect] = useState("select-76453-0");
+  // Submit Modal state
+  const [showSubmitModal, setSubmitModal] = useState(false);
   // Redux - Patient State
   const patient = useSelector((state) => state.patient);
   // Redux - User State
@@ -26,6 +29,11 @@ const FormHandler = () => {
   const loincForm = useSelector((state) => state.loincForm);
   // Form values state
   const [formikValues, setFormikValues] = useState(initialValues);
+  // FHIR API Service
+  const fhirAPIService = fhirAPI;
+  // Current Form ID, this is an empty string if a new form. Currently doesn't do much but will be critical for form loading later.
+  const [formId, setFormId] = useState("");
+
   /**
    * Effect called on first form render.
    */
@@ -97,11 +105,33 @@ const FormHandler = () => {
   /**
    * Calls when submit button is clicked.
    *
+   * Passes current form values and loinc form panels to fhirAPIService.
+   *
    * @param values - formik values object containing current form values.
    */
-  const onSubmitForm = (values) => {
-    //  alert(JSON.stringify(values, null, 2));
-    console.log(values);
+  const onSubmitForm = async (values) => {
+    const formPanels = loincForm.formPanels;
+    const providerId = user.userData.id;
+    const patientId = patient.patientData.id;
+    const currentFormId = formId;
+    await fhirAPIService
+      .saveQuestionnaireResponse(
+        values,
+        formPanels,
+        currentFormId,
+        patientId,
+        providerId
+      )
+      .then((res) => {
+        console.log("Form submitted.");
+        console.log(res);
+        setFormId(res.id);
+        setSubmitModal(true);
+      })
+      .catch((error) => {
+        console.log("Error submitting form.");
+        console.error(error);
+      });
   };
 
   /**
@@ -136,6 +166,12 @@ const FormHandler = () => {
 
   return (
     <>
+      {showSubmitModal ? (
+        <Modal setModal={setSubmitModal} headerText="Success">
+          {`Form ${formId} submitted successfully!`}
+        </Modal>
+      ) : null}
+      {/* FORM STARTS HERE */}
       <Formik
         initialValues={formikValues}
         validationSchema={validationSchema}

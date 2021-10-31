@@ -38,8 +38,6 @@ const HomeScreen = () => {
         <LoadingIndicator text="Loading..." />
       ) : (
         <>
-          {/* <PatientBanner patientData={patient.patientData} /> */}
-
           {/* Warning Messages */}
           {patient.error.message && (
             <MessageBanner
@@ -65,8 +63,8 @@ const HomeScreen = () => {
 
           <main>
             <div className="max-w-6xl mx-auto py-6 sm:px-6 lg:px-8 items-center py-10 justify-center flex-grow">
-                {/* Components */}
-                <FormHandler />
+              {/* Components */}
+              <FormHandler fhirAPI={fhirAPIService} />
             </div>
 
             {/* /End replace */}
