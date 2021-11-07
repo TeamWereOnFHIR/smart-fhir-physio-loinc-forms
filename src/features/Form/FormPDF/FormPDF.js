@@ -12,9 +12,9 @@ const FormPDF = (data) => {
   const location = useLocation();
   const loincForm = useSelector((state) => location.state.loincForm);
   // get title and panelID -- Form Metta data
-  const formMetaData = location.state.formValues;
-  const formPanels = location.state.LoincForm; //array of form pannel objects
-  console.log(formMetaData);
+  //const formMetaData = location.state.formValues;
+  // const formPanels = location.state.LoincForm; //array of form pannel objects
+  //console.log(formMetaData);
 
   //filter a specific pannel
   // const initalPanel = formPanels.filter((panel) =>
