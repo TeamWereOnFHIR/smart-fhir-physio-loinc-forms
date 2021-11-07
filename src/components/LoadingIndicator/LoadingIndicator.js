@@ -1,9 +1,11 @@
 import "./LoadingIndicator.css";
 
 /**
- * App loading indicator.
+ * App loading indicator, shown when some loading flag is true.
  *
  * Usage: <LoadingIndicator display="Loading..." />
+ *
+ * Customised original implementation from: https://tailwindcomponents.com/component/animated-ellipsis
  */
 const LoadingIndicator = ({ text }) => {
   return (
