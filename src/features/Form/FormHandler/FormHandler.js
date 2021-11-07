@@ -1,13 +1,12 @@
-import { Form, Formik } from "formik";
-import { Panels, initialValues } from "../formConstants";
-import { useEffect, useState } from "react";
-
 import Button from "@components/Button/Button";
+import Modal from "@components/Modal/Modal";
+import { Form, Formik } from "formik";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { initialValues, Panels } from "../formConstants";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
-import Modal from "@components/Modal/Modal";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import validationSchema from "./validationSchema";
 
 /**
