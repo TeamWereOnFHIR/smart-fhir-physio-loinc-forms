@@ -28,6 +28,13 @@ This app is built with ReactJS and requires:
 2. In the root directory of this repo run `npm i` to install packages
 3. `npm start` to run react app, by default on `localhost:3000` (Note that app will reload on code changes, but failing this you can terminate and restart app)
 
+## On smarthealthit sandbox server
+
+Please note that you have to post a Questionnaire Resource to the sandbox server first,
+and update the FhirResources.sandboxQLoincPhysioFormId value to the new resource id.
+
+This will not be an issue when this app is no longer living on a sandbox server.
+
 # Development
 
 ## Merge Policy
@@ -88,7 +95,7 @@ app/
 │  │  ├─ theme/
 │  │  ├─ utils/
 │  ├─ components/
-│  │  ├─ ...componentGroups/
+│  │  ├─ ...component/
 │  ├─ features/
 │  │  ├─ ...features/
 │  ├─ redux/
