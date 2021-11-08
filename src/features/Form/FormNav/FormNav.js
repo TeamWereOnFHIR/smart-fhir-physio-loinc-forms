@@ -9,6 +9,14 @@ const formNavStyles = {
   cursor: "cursor-pointer",
 };
 
+/**
+ * Form navigation that allows switching between form panels.
+ *
+ * Renders active state to show user which form they are viewing.
+ *
+ * @param handleSelect - function from parent that updates selected panel.
+ * @param activeSelect - current active selection.
+ */
 const FormNav = ({ handleSelect, activeSelect }) => {
   const formPanels = Panels;
 
@@ -35,8 +43,7 @@ const FormNav = ({ handleSelect, activeSelect }) => {
                   isActive(formPanels[panel].selectId)
                     ? formNavStyles.active
                     : formNavStyles.inactive
-                }`
-                }
+                }`}
                 onClick={(e) => handleSelect(e)}
               >
                 {formPanels[panel].title}

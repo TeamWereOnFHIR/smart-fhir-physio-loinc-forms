@@ -66,8 +66,6 @@ const HomeScreen = () => {
               {/* Components */}
               <FormHandler fhirAPI={fhirAPIService} />
             </div>
-
-            {/* /End replace */}
           </main>
         </>
       )}

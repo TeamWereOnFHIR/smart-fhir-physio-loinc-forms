@@ -1,12 +1,13 @@
-import Button from "@components/Button/Button";
-import Modal from "@components/Modal/Modal";
 import { Form, Formik } from "formik";
+import { Panels, initialValues } from "../formConstants";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { initialValues, Panels } from "../formConstants";
+
+import Button from "@components/Button/Button";
 import FormNav from "../FormNav/FormNav";
 import FormPanel from "../FormPanel/FormPanel";
+import Modal from "@components/Modal/Modal";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import validationSchema from "./validationSchema";
 
 /**
@@ -42,8 +43,17 @@ const FormHandler = ({ fhirAPI }) => {
     prefillProvider();
   }, []);
 
+  /**
+   * Prefills patient data.
+   *
+   * Needs to be extended into its own service when we have more complex prefills.
+   */
   const prefillPatient = () => {
     const initialPanel = loincForm.formPanels[0];
+    // Guard on missing questionnaire
+    if (!initialPanel) {
+      return;
+    }
     const patientData = patient.patientData;
     const newFormikValues = formikValues;
     // Initial Panel Prefill
@@ -70,8 +80,16 @@ const FormHandler = ({ fhirAPI }) => {
     setFormikValues(newFormikValues);
   };
 
+  /**
+   * Prefills practitioner data.
+   *
+   * Needs to be extended into its own service when we have more complex prefills
+   */
   const prefillProvider = () => {
     const initialPanel = loincForm.formPanels[0];
+    if (!initialPanel) {
+      return;
+    }
     const providerData = user.userData;
     const newFormikValues = formikValues;
     // Initial Panel Prefill
@@ -134,7 +152,7 @@ const FormHandler = ({ fhirAPI }) => {
   };
 
   /**
-   * Calls when print button is clicked.
+   * Calls when print button is clicked. Pushes current values to form and routes to print.
    *
    * @param values - formik values object containing current form values.
    */
@@ -210,8 +228,6 @@ const FormHandler = ({ fhirAPI }) => {
                 {/* END Form Panel and Form Nav */}
               </div>
               {/* Button Panel */}
-              {/* <div className="fixed w-full max-w-7xl"> */}
-              {/* TODO: do better with button panel, alignment etc. */}
               <div className="flex flex row items-start flex-row w-full max-w-6xl -my-18 justify-end space-x-1 flex-grow content-between">
                 <Button
                   buttonType="secondary"
@@ -226,7 +242,6 @@ const FormHandler = ({ fhirAPI }) => {
                   Submit
                 </Button>
               </div>
-              {/* </div> */}
               {/* END MAIN FLEX */}
             </div>
           </Form>

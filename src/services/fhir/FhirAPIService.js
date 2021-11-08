@@ -164,6 +164,7 @@ class FhirAPIService {
         formPanels[1],
         formValues.GlobalPhysicalFuncPanel
       ),
+      // TODO: Deal with condition sub panels.
       // ...this.mapFormToPanelAnswers(
       //   formPanels[2],
       //   formValues.ConditionPopulationPanel
@@ -186,9 +187,9 @@ class FhirAPIService {
       ),
       ...this.mapFormToPanelAnswers(formPanels[7], formValues.BillingPanel),
     ];
-    console.log("Items for saving.");
-    console.log(formPanels);
-    console.log(formValues);
+    // console.log("Items for saving.");
+    // console.log(formPanels);
+    // console.log(formValues);
 
     // Update if formId existing.
     if (formId) {
@@ -207,7 +208,6 @@ class FhirAPIService {
    * @returns Array of answer objects for a panel.
    */
   mapFormToPanelAnswers = (formPanel, formValues) => {
-    const valueKeys = Object.keys(formValues);
     if (formPanel.linkId === Panels.InitialPanel.id) {
       // Map Initial Panel without group
       return this.mapAnswerItems(formPanel, formValues);
@@ -220,6 +220,11 @@ class FhirAPIService {
     }
   };
 
+  /**
+   * Maps a panels answers.
+   * @param formPanel - form panel to map
+   * @param formValues - relevant values for form panel
+   */
   mapFormGroupToAnswers = (formPanel, formValues) => {
     // Form group is an object with items of mapped form field answers
     const answerGroup = {

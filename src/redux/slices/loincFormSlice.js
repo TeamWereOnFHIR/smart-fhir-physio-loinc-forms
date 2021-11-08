@@ -9,7 +9,7 @@ const initialState = {
 };
 
 /**
- * Loinc Form Questionnaire resource redux slice for storing loinc form data structuer for consumption.
+ * Loinc Form Questionnaire resource redux slice. Stores loinc form data structures for consumption.
  */
 export const loincFormSlice = createSlice({
   name: "loincForm",

@@ -1,11 +1,14 @@
-import { Field } from "formik";
 import "react-datepicker/dist/react-datepicker.css";
-import { useSelector } from "react-redux";
-import DatePickerField from "../DatePicker/DatePicker";
+
 import { formPlaceholder, formTypes, subPanelKeys } from "../formConstants";
 
+import DatePickerField from "../DatePicker/DatePicker";
+import { Field } from "formik";
+import { useSelector } from "react-redux";
+
 const panelStyles = {
-  panel: "bg-white w-8/12 shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4 overflow-y-scroll max-h-96",
+  panel:
+    "bg-white w-8/12 shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4 overflow-y-scroll max-h-96",
   fieldDiv: "col-span-6 sm:col-span-3 ",
   label: "block text-gray-700 font-bold text-sm mt-2 mb-2",
   panelH2: "block text-gray-700 font-bold mb-2 text-2xl mt-4",
@@ -23,7 +26,6 @@ const panelStyles = {
  * Values connected to Formik state.
  *
  * @param panel - Panel that this form panel will create and render.
- * @returns
  */
 const FormPanel = ({ panel }) => {
   // Form Data State
@@ -41,8 +43,6 @@ const FormPanel = ({ panel }) => {
     }
   });
   const panelItems = panelObj[0]?.item || [];
-
-  // console.log(panelItems);
 
   /**
    * Renders a single form field based on type.

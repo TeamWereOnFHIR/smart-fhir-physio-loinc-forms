@@ -14,6 +14,19 @@ const styles = {
     "flex items-center justify-end p-6 border-t border-solid rounded-b",
 };
 
+/**
+ * Creates a modal that pops out when to show a notification or message after
+ * an action is done.
+ *
+ * Upon clicking OK in the modal, will set state of modal to false (should be handled in parent).
+ *
+ * Usage:
+ *  <Modal setModal={react state setter} headerText={heading string}>Message</MessageBanner>
+ *
+ * @param setModal - (fn) react state setter, sets false onClose in modal.
+ * @param headerText - (str) title if applicable.
+ * @param children - (str) children to render (i.e., a message).
+ */
 const Modal = ({ setModal, headerText, children }) => {
   /**
    * Closes modal by setting state in parent to not show (false).

@@ -59,7 +59,7 @@ In that case `FhirServiceConstants` under `src/services/constants` can be update
 
 ## Additional assets used
 
-**Loading Indcator**: Loading indicator code customised from original created by [wadday](https://tailwindcomponents.com/component/animated-ellipsis) [5].
+**Loading Indcator**: Loading indicator code customised from original created by [wadday](https://tailwindcomponents.com/component/animated-ellipsis) [5]
 
 # Development
 
