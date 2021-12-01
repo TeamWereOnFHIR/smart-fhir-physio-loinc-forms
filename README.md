@@ -35,9 +35,11 @@ This app is built with ReactJS and requires:
 
 **Temporary Notice**
 
-We are urrently setup to launch on the [SmartHealthIt](https://smarthealthit.org/) FHIR Sandbox (Server endpoint url: `https://r4.smarthealthit.org`).
+We are currently setup to launch on the [SmartHealthIt](https://smarthealthit.org/) FHIR Sandbox (Server endpoint url: `https://r4.smarthealthit.org`).
 Therefore the app will require manual posting of the `Questionnaire` FHIR Resource
 for the loinc form provided by [LHC Forms](https://lhcforms.nlm.nih.gov/lhcforms) [4], this is provided under `src/assets/fhir`.
+
+We recommend using [Postman](https://www.postman.com/). Create a `POST` request to `https://r4.smarthealthit.org/Questionnaire` with the `LoincInitialVisitQuestionnaire.json` (found in `src/assets/fhir` content in the request body. When the request succeeds, you will get a response back that includes the FHIR Questionnaire resource in the body. Copy the resource id from the response.
 
 Once the resource is in the FHIR Server, update the `FhirResources.sandboxQLoincPhysioFormId` value in `src/services/constants` to the new resource id.
 This will not be required when this app is setup on a standalone FHIR server that does not clean up/remove new resources.
